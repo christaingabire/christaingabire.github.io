@@ -2,15 +2,57 @@
   {
     "objectID": "about.html",
     "href": "about.html",
-    "title": "About",
+    "title": "Christa Ingabire",
     "section": "",
-    "text": "Hello! My name is CHrista Ingabire and I am an MDS student. I’m from Kigali, Rwanda and I’ve also spent 8 years in the U.S. I’m excited to be in Vancouver- It’s very beautiful and there is beautiful nature. The people here are also lovely."
+    "text": "Background\nI am from Kigali, Rwanda and I worked as a data engineer for government social security institution. Previously, I worked as a software developer for an IT consulting company, Logisolve, based in the Twin Cities, Minnesota in the U.S. I graduated college in 2023 from Saint Mary’s University of Minnesota in Winona, Minnesota, United States. Before that, I lived in Chicago during high school.\n\n\nWhy data science\nEver since I became conscious of the job of data scientists, I was interested in that kind of work. After working as a data engineer and learning about the power of data and how much it could be used to generate powerful insights, I became interested in actively pursuing a data science degree to learn the proper tools, skills, and techniques of data science.\n\n\nOutside of data science\nOutside of data science I enjoy spending time outside whether it is going on nature walks or hiking. I enjoy visitng museums, parks, and travelling. I also enjoy going to coffee shops and restaurants."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Christa Ingabire",
+    "title": "Home",
     "section": "",
-    "text": "This is a Quarto website.\nTo learn more about Quarto websites visit https://quarto.org/docs/websites."
+    "text": "Hello! My name is Christa Ingabire and I am an MDS student 2026-2027."
+  },
+  {
+    "objectID": "posts/index.html",
+    "href": "posts/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "Orientation day on campus."
+  },
+  {
+    "objectID": "posts/blog.html",
+    "href": "posts/blog.html",
+    "title": "Blog",
+    "section": "",
+    "text": "No matching items"
+  },
+  {
+    "objectID": "slides/slides.html#getting-up",
+    "href": "slides/slides.html#getting-up",
+    "title": "Habits",
+    "section": "Getting up",
+    "text": "Getting up\n\nTurn off alarm\nGet out of bed"
+  },
+  {
+    "objectID": "slides/slides.html#breakfast",
+    "href": "slides/slides.html#breakfast",
+    "title": "Habits",
+    "section": "Breakfast",
+    "text": "Breakfast\n\nEat eggs\nDrink coffee"
+  },
+  {
+    "objectID": "slides/slides.html#dinner",
+    "href": "slides/slides.html#dinner",
+    "title": "Habits",
+    "section": "Dinner",
+    "text": "Dinner\n\nEat spaghetti\nDrink wine"
+  },
+  {
+    "objectID": "slides/slides.html#going-to-sleep",
+    "href": "slides/slides.html#going-to-sleep",
+    "title": "Habits",
+    "section": "Going to sleep",
+    "text": "Going to sleep\n\nGet in bed\nCount sheep"
   }
 ]

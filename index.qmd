@@ -1,9 +1,5 @@
 ---
-title: "Christa Ingabire"
+title: "Home"
 ---
 
-This is a Quarto website.
-
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
-
-![](images/akagera2.jpg){width=250px}
+Hello! My name is Christa Ingabire and I am an MDS student 2026-2027. 

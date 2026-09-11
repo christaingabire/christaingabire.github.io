@@ -1,5 +1,16 @@
 ---
-title: "About"
+title: "Christa Ingabire"
+about:
+  template: jolla
+  image: images/akagera2.jpg
 ---
 
-Hello! My name is CHrista Ingabire and I am an MDS student. I'm from Kigali, Rwanda and I've also spent 8 years in the U.S. I'm excited to be in Vancouver- It's very beautiful and there is beautiful nature. The people here are also lovely.
+
+# Background
+I am  from Kigali, Rwanda and I worked as a data engineer for government social security institution. Previously, I worked as a software developer for an IT consulting company, Logisolve, based in the Twin Cities, Minnesota in the U.S. I graduated college in 2023 from Saint Mary's University of Minnesota in Winona, Minnesota, United States. Before that, I lived in Chicago during high school. 
+
+# Why data science
+Ever since I became conscious of the job of data scientists, I was interested in that kind of work. After working as a data engineer and learning about the power of data and how much it could be used to generate powerful insights, I became interested in actively pursuing a data science degree to learn the proper tools, skills, and techniques of data science. 
+
+# Outside of data science
+Outside of data science I enjoy spending time outside whether it is going on nature walks or hiking. I enjoy visitng museums, parks, and travelling. I also enjoy going to coffee shops and restaurants.
