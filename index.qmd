@@ -1,5 +1,11 @@
 ---
 title: "Home"
+about:
+  template: jolla
+  image: images/profile1.jpg
 ---
 
-Hello! My name is Christa Ingabire and I am an MDS student 2026-2027. 
+Hi, I’m Christa Ingabire. I’m am currently pursuing a Master's in Data Science at the University of British Columbia. Before starting graduate school, I worked as a data engineer
+at the Rwanda Social Security Board, in Kigali, Rwanda, where I built and maintained data pipelines supporting national social protection programs. Previously, I worked in software and data consulting in Minneapolis, Minnesota, U.S.A.
+
+My interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when the underlying data represents people, institutions, or public systems.

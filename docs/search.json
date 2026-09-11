@@ -4,25 +4,46 @@
     "href": "about.html",
     "title": "Christa Ingabire",
     "section": "",
-    "text": "Background\nI am from Kigali, Rwanda and I worked as a data engineer for government social security institution. Previously, I worked as a software developer for an IT consulting company, Logisolve, based in the Twin Cities, Minnesota in the U.S. I graduated college in 2023 from Saint Mary’s University of Minnesota in Winona, Minnesota, United States. Before that, I lived in Chicago during high school.\n\n\nWhy data science\nEver since I became conscious of the job of data scientists, I was interested in that kind of work. After working as a data engineer and learning about the power of data and how much it could be used to generate powerful insights, I became interested in actively pursuing a data science degree to learn the proper tools, skills, and techniques of data science.\n\n\nOutside of data science\nOutside of data science I enjoy spending time outside whether it is going on nature walks or hiking. I enjoy visitng museums, parks, and travelling. I also enjoy going to coffee shops and restaurants."
+    "text": "I am a data scientist and data engineer currently pursuing a Master’s in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary’s University of Minnesota before beginning my career in the Twin Cities.\nAt Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.\nI later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems."
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "Christa Ingabire",
+    "section": "",
+    "text": "I am a data scientist and data engineer currently pursuing a Master’s in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary’s University of Minnesota before beginning my career in the Twin Cities.\nAt Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.\nI later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "Christa Ingabire",
+    "section": "Why data science",
+    "text": "Why data science\nMy experience at RSSB in Kigali changed how I thought about data. Building a reliable pipeline can tell us what happened. A dashboard can reveal where something changed. But many important questions require something more: Why did it change? Which intervention caused it? Would the same intervention work for another population?\nThose questions pushed my interests beyond data infrastructure toward statistics, causal reasoning, and machine learning.\nI am now developing those foundations through graduate study at UBC while continuing to explore data engineering, applied statistics, machine learning, and the design of trustworthy data systems."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "Christa Ingabire",
+    "section": "Outside of data science",
+    "text": "Outside of data science\nWhen I am not at my desk, I am reading, writing, or always trying new cafés and restaurants wherever I am. I love connecting with people, so do not hesitate to reach out."
   },
   {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "Hello! My name is Christa Ingabire and I am an MDS student 2026-2027."
+    "text": "Hi, I’m Christa Ingabire. I’m am currently pursuing a Master’s in Data Science at the University of British Columbia. Before starting graduate school, I worked as a data engineer at the Rwanda Social Security Board, in Kigali, Rwanda, where I built and maintained data pipelines supporting national social protection programs. Previously, I worked in software and data consulting in Minneapolis, Minnesota, U.S.A.\nMy interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when the underlying data represents people, institutions, or public systems."
   },
   {
-    "objectID": "posts/index.html",
-    "href": "posts/index.html",
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
     "title": "My first weeks in MDS",
     "section": "",
     "text": "Orientation day on campus."
   },
   {
-    "objectID": "posts/blog.html",
-    "href": "posts/blog.html",
+    "objectID": "posts/first-weeks/blog.html",
+    "href": "posts/first-weeks/blog.html",
     "title": "Blog",
     "section": "",
     "text": "No matching items"
