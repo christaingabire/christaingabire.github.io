@@ -2,5 +2,11 @@
   {
     "listing": "/posts/first-weeks/blog.html",
     "items": []
+  },
+  {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/first-weeks/index.html"
+    ]
   }
 ]
