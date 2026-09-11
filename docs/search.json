@@ -1,52 +1,10 @@
 [
   {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "Christa Ingabire",
-    "section": "",
-    "text": "I am a data scientist and data engineer currently pursuing a Master’s in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary’s University of Minnesota before beginning my career in the Twin Cities.\nAt Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.\nI later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems."
-  },
-  {
-    "objectID": "about.html#background",
-    "href": "about.html#background",
-    "title": "Christa Ingabire",
-    "section": "",
-    "text": "I am a data scientist and data engineer currently pursuing a Master’s in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary’s University of Minnesota before beginning my career in the Twin Cities.\nAt Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.\nI later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems."
-  },
-  {
-    "objectID": "about.html#why-data-science",
-    "href": "about.html#why-data-science",
-    "title": "Christa Ingabire",
-    "section": "Why data science",
-    "text": "Why data science\nMy experience at RSSB in Kigali changed how I thought about data. Building a reliable pipeline can tell us what happened. A dashboard can reveal where something changed. But many important questions require something more: Why did it change? Which intervention caused it? Would the same intervention work for another population?\nThose questions pushed my interests beyond data infrastructure toward statistics, causal reasoning, and machine learning.\nI am now developing those foundations through graduate study at UBC while continuing to explore data engineering, applied statistics, machine learning, and the design of trustworthy data systems."
-  },
-  {
-    "objectID": "about.html#outside-of-data-science",
-    "href": "about.html#outside-of-data-science",
-    "title": "Christa Ingabire",
-    "section": "Outside of data science",
-    "text": "Outside of data science\nWhen I am not at my desk, I am reading, writing, or always trying new cafés and restaurants wherever I am. I love connecting with people, so do not hesitate to reach out."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
-    "section": "",
-    "text": "Hi, I’m Christa Ingabire. I’m am currently pursuing a Master’s in Data Science at the University of British Columbia. Before starting graduate school, I worked as a data engineer at the Rwanda Social Security Board, in Kigali, Rwanda, where I built and maintained data pipelines supporting national social protection programs. Previously, I worked in software and data consulting in Minneapolis, Minnesota, U.S.A.\nMy interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when the underlying data represents people, institutions, or public systems."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html",
-    "href": "posts/first-weeks/index.html",
-    "title": "My first weeks in MDS",
-    "section": "",
-    "text": "Orientation day on campus."
-  },
-  {
-    "objectID": "posts/first-weeks/blog.html",
-    "href": "posts/first-weeks/blog.html",
+    "objectID": "blog.html",
+    "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "No matching items"
+    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides/slides.html#getting-up",
@@ -77,11 +35,11 @@
     "text": "Going to sleep\n\nGet in bed\nCount sheep"
   },
   {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "Blog",
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
     "section": "",
-    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
+    "text": "Orientation day on campus."
   },
   {
     "objectID": "posts/first-weeks/index.html#first-day-at-ubc",
@@ -89,5 +47,40 @@
     "title": "My first weeks in MDS",
     "section": "First Day at UBC",
     "text": "First Day at UBC\nThere is something strange about becoming a student again after spending a few years working full-time.\nMy first day at UBC was mostly a combination of finding buildings, meeting people whose names I was trying very hard to remember, and slowly realizing how much I am going to have to learn this year.\nBefore coming to Vancouver, I had been working as a data engineer in Kigali. Now I am back in a classroom, beginning a master’s in data science and returning to subjects I haven’t seriously studied in a while. It is exciting, but also slightly intimidating.\nI don’t know exactly what this year will look like yet. For now, I’m excited to learn, rebuild some foundations I’ve forgotten, and see where the program takes me."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "Hi, I’m Christa Ingabire. I’m am currently pursuing a Master’s in Data Science at the University of British Columbia. Before starting graduate school, I worked as a data engineer at the Rwanda Social Security Board, in Kigali, Rwanda, where I built and maintained data pipelines supporting national social protection programs. Previously, I worked in software and data consulting in Minneapolis, Minnesota, U.S.A.\nMy interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when the underlying data represents people, institutions, or public systems."
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "Christa Ingabire",
+    "section": "",
+    "text": "I am a data scientist and data engineer currently pursuing a Master’s in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary’s University of Minnesota before beginning my career in the Twin Cities.\nAt Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.\nI later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems."
+  },
+  {
+    "objectID": "about.html#background",
+    "href": "about.html#background",
+    "title": "Christa Ingabire",
+    "section": "",
+    "text": "I am a data scientist and data engineer currently pursuing a Master’s in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary’s University of Minnesota before beginning my career in the Twin Cities.\nAt Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.\nI later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems."
+  },
+  {
+    "objectID": "about.html#why-data-science",
+    "href": "about.html#why-data-science",
+    "title": "Christa Ingabire",
+    "section": "Why data science",
+    "text": "Why data science\nMy experience at RSSB in Kigali changed how I thought about data. Building a reliable pipeline can tell us what happened. A dashboard can reveal where something changed. But many important questions require something more: Why did it change? Which intervention caused it? Would the same intervention work for another population?\nThose questions pushed my interests beyond data infrastructure toward statistics, causal reasoning, and machine learning.\nI am now developing those foundations through graduate study at UBC while continuing to explore data engineering, applied statistics, machine learning, and the design of trustworthy data systems."
+  },
+  {
+    "objectID": "about.html#outside-of-data-science",
+    "href": "about.html#outside-of-data-science",
+    "title": "Christa Ingabire",
+    "section": "Outside of data science",
+    "text": "Outside of data science\nWhen I am not at my desk, I am reading, writing, or always trying new cafés and restaurants wherever I am. I love connecting with people, so do not hesitate to reach out."
   }
 ]
