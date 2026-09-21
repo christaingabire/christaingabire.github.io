@@ -1,0 +1,7 @@
+---
+title: "Palmer Penguins Analysis"
+author: "Christa Ingabire"
+date: 2026-09-21
+---
+
+This is the Palmer Penguins analysis in Python!

@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "My first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
+    "text": "Palmer Penguins Analysis\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides/slides.html#getting-up",
@@ -33,6 +33,13 @@
     "title": "Habits",
     "section": "Going to sleep",
     "text": "Going to sleep\n\nGet in bed\nCount sheep"
+  },
+  {
+    "objectID": "posts/python-post/index.html",
+    "href": "posts/python-post/index.html",
+    "title": "Palmer Penguins Analysis",
+    "section": "",
+    "text": "This is the Palmer Penguins analysis in Python!"
   },
   {
     "objectID": "posts/first-weeks/index.html",
