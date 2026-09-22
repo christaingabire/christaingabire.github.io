@@ -1,0 +1,132 @@
+---
+title: "Life Expectancy Across Continents"
+author: "Christa Ingabire"
+date: 2026-09-21
+---
+
+
+## Introduction
+
+Life expectancy is one way of summarizing differences in population health
+across countries and over time. In this analysis, I use the Gapminder dataset
+to explore how average life expectancy differs across continents and how those
+differences changed between 1952 and 2007.
+
+The analysis focuses on two questions:
+
+1. How does average life expectancy compare across continents in the most
+   recent year available?
+2. How has average life expectancy changed across continents over time?
+
+Data source: [Gapminder](https://www.gapminder.org/)
+
+## Exploring the data
+
+The Gapminder dataset contains country-level observations for population,
+life expectancy, and GDP per capita across multiple years. I first load the
+packages and inspect the first few observations
+
+```{r}
+#| message: false
+#| warning: false
+
+library(gapminder)
+library(ggplot2)
+
+head(gapminder)
+```
+
+Each row represents a country in a particular year. For this analysis, the
+most important variables are continent, year, and lifeExp
+
+## Life expectancy in the most recent year
+
+Before comparing continents, I identify the most recent year represented in
+the dataset
+
+```{r}
+latest_year <- max(gapminder$year)
+
+latest_year
+```
+
+The most recent year in the dataset is 2007. I then restrict the data to that
+year and calculate the mean life expectancy for each continent
+
+```{r}
+latest_summary <- gapminder |>
+  subset(year == latest_year) |>
+  aggregate(lifeExp ~ continent, data = _, FUN = mean)
+
+latest_summary
+```
+
+The results show substantial differences in average life expectancy across
+continents in 2007. Oceania has the highest average life expectancy, followed
+by Europe, while Africa has the lowest average among the continents represented
+in the dataset
+
+However, this comparison only shows one point in time. Looking across the full
+time period gives a better picture of how these differences developed
+
+## Life expectancy over time
+
+To examine change over time, I calculate the mean life expectancy for every
+continent in each year
+
+```{r}
+continent_year <- aggregate(
+  lifeExp ~ continent + year,
+  data = gapminder,
+  FUN = mean
+)
+
+head(continent_year)
+```
+
+This produces one average for each continent-year combination, allowing the
+changes in life expectancy to be compared across the full period
+
+```{r}
+#| label: fig-life-expectancy
+#| fig-cap: "Average life expectancy by continent from 1952 to 2007."
+
+ggplot(
+  continent_year,
+  aes(x = year, y = lifeExp, color = continent)
+) +
+  geom_line(linewidth = 1) +
+  labs(
+    x = "Year",
+    y = "Average life expectancy",
+    color = "Continent"
+  ) +
+  theme_minimal()
+```
+
+## Findings
+
+Average life expectancy generally increases across all five continents over
+the period shown. The size and pattern of that increase, however, differ
+between continents
+
+Oceania and Europe remain among the continents with the highest average life
+expectancy throughout the period. Asia shows a substantial increase, moving
+from an average below 50 years in the early part of the dataset to above 70
+years by 2007. The Americas also show a steady upward trend
+
+Africa follows a different pattern. Average life expectancy increases for
+much of the period but changes relatively little during the 1990s and early
+2000s before increasing again by 2007. It remains below the averages of the
+other continents throughout the dataset
+
+## Conclusion
+
+The Gapminder data show that average life expectancy increased across all
+continents between 1952 and 2007, but the differences between continents did
+not disappear. The analysis also demonstrates why examining a trend over time
+can reveal information that a single-year comparison cannot.
+
+These results are descriptive. They show patterns in the Gapminder data but
+do not establish why the differences between continents exist or what caused
+life expectancy to change over time.

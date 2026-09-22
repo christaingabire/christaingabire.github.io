@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Palmer Penguins Analysis\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
+    "text": "Palmer Penguins Analysis\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nLife Expectancy Across Continents\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy first weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides/slides.html#getting-up",
@@ -33,6 +33,69 @@
     "title": "Habits",
     "section": "Going to sleep",
     "text": "Going to sleep\n\nGet in bed\nCount sheep"
+  },
+  {
+    "objectID": "posts/r-post/index.html",
+    "href": "posts/r-post/index.html",
+    "title": "Life Expectancy Across Continents",
+    "section": "",
+    "text": "Life expectancy is one way of summarizing differences in population health across countries and over time. In this analysis, I use the Gapminder dataset to explore how average life expectancy differs across continents and how those differences changed between 1952 and 2007.\nThe analysis focuses on two questions:\n\nHow does average life expectancy compare across continents in the most recent year available?\nHow has average life expectancy changed across continents over time?\n\nData source: Gapminder"
+  },
+  {
+    "objectID": "posts/r-post/index.html#introduction",
+    "href": "posts/r-post/index.html#introduction",
+    "title": "Life Expectancy Across Continents",
+    "section": "",
+    "text": "Life expectancy is one way of summarizing differences in population health across countries and over time. In this analysis, I use the Gapminder dataset to explore how average life expectancy differs across continents and how those differences changed between 1952 and 2007.\nThe analysis focuses on two questions:\n\nHow does average life expectancy compare across continents in the most recent year available?\nHow has average life expectancy changed across continents over time?\n\nData source: Gapminder"
+  },
+  {
+    "objectID": "posts/r-post/index.html#exploring-the-data",
+    "href": "posts/r-post/index.html#exploring-the-data",
+    "title": "Life Expectancy Across Continents",
+    "section": "Exploring the data",
+    "text": "Exploring the data\nThe Gapminder dataset contains country-level observations for population, life expectancy, and GDP per capita across multiple years. I first load the packages and inspect the first few observations.\n\nlibrary(gapminder)\nlibrary(ggplot2)\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\nEach row represents a country in a particular year. For this analysis, the most important variables are continent, year, and lifeExp."
+  },
+  {
+    "objectID": "posts/r-post/index.html#life-expectancy-in-the-most-recent-year",
+    "href": "posts/r-post/index.html#life-expectancy-in-the-most-recent-year",
+    "title": "Life Expectancy Across Continents",
+    "section": "Life expectancy in the most recent year",
+    "text": "Life expectancy in the most recent year\nBefore comparing continents, I identify the most recent year represented in the dataset\n\nlatest_year &lt;- max(gapminder$year)\n\nlatest_year\n\n[1] 2007\n\n\nThe most recent year in the dataset is 2007. I then restrict the data to that year and calculate the mean life expectancy for each continent\n\nlatest_summary &lt;- gapminder |&gt;\n  subset(year == latest_year) |&gt;\n  aggregate(lifeExp ~ continent, data = _, FUN = mean)\n\nlatest_summary\n\n  continent  lifeExp\n1    Africa 54.80604\n2  Americas 73.60812\n3      Asia 70.72848\n4    Europe 77.64860\n5   Oceania 80.71950\n\n\nThe results show substantial differences in average life expectancy across continents in 2007. Oceania has the highest average life expectancy, followed by Europe, while Africa has the lowest average among the continents represented in the dataset.\nHowever, this comparison only shows one point in time. Looking across the full time period gives a better picture of how these differences developed"
+  },
+  {
+    "objectID": "posts/r-post/index.html#life-expectancy-over-time",
+    "href": "posts/r-post/index.html#life-expectancy-over-time",
+    "title": "Life Expectancy Across Continents",
+    "section": "Life expectancy over time",
+    "text": "Life expectancy over time\nTo examine change over time, I calculate the mean life expectancy for every continent in each year\n\ncontinent_year &lt;- aggregate(\n  lifeExp ~ continent + year,\n  data = gapminder,\n  FUN = mean\n)\n\nhead(continent_year)\n\n  continent year  lifeExp\n1    Africa 1952 39.13550\n2  Americas 1952 53.27984\n3      Asia 1952 46.31439\n4    Europe 1952 64.40850\n5   Oceania 1952 69.25500\n6    Africa 1957 41.26635\n\n\nThis produces one average for each continent-year combination, allowing the changes in life expectancy to be compared across the full period\n\nggplot(\n  continent_year,\n  aes(x = year, y = lifeExp, color = continent)\n) +\n  geom_line(linewidth = 1) +\n  labs(\n    x = \"Year\",\n    y = \"Average life expectancy\",\n    color = \"Continent\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\nFigure 1: Average life expectancy by continent from 1952 to 2007."
+  },
+  {
+    "objectID": "posts/r-post/index.html#findings",
+    "href": "posts/r-post/index.html#findings",
+    "title": "Life Expectancy Across Continents",
+    "section": "Findings",
+    "text": "Findings\nAverage life expectancy generally increases across all five continents over the period shown. The size and pattern of that increase, however, differ between continents.\nOceania and Europe remain among the continents with the highest average life expectancy throughout the period. Asia shows a substantial increase, moving from an average below 50 years in the early part of the dataset to above 70 years by 2007. The Americas also show a steady upward trend.\nAfrica follows a different pattern. Average life expectancy increases for much of the period but changes relatively little during the 1990s and early 2000s before increasing again by 2007. It remains below the averages of the other continents throughout the dataset."
+  },
+  {
+    "objectID": "posts/r-post/index.html#conclusion",
+    "href": "posts/r-post/index.html#conclusion",
+    "title": "Life Expectancy Across Continents",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe Gapminder data show that average life expectancy increased across all continents between 1952 and 2007, but the differences between continents did not disappear. The analysis also demonstrates why examining a trend over time can reveal information that a single-year comparison cannot.\nThese results are descriptive. They show patterns in the Gapminder data but do not establish why the differences between continents exist or what caused life expectancy to change over time."
+  },
+  {
+    "objectID": "posts/first-weeks/index.html",
+    "href": "posts/first-weeks/index.html",
+    "title": "My first weeks in MDS",
+    "section": "",
+    "text": "Orientation day on campus."
+  },
+  {
+    "objectID": "posts/first-weeks/index.html#first-day-at-ubc",
+    "href": "posts/first-weeks/index.html#first-day-at-ubc",
+    "title": "My first weeks in MDS",
+    "section": "First Day at UBC",
+    "text": "First Day at UBC\nThere is something strange about becoming a student again after spending a few years working full-time.\nMy first day at UBC was mostly a combination of finding buildings, meeting people whose names I was trying very hard to remember, and slowly realizing how much I am going to have to learn this year.\nBefore coming to Vancouver, I had been working as a data engineer in Kigali. Now I am back in a classroom, beginning a master’s in data science and returning to subjects I haven’t seriously studied in a while. It is exciting, but also slightly intimidating.\nI don’t know exactly what this year will look like yet. For now, I’m excited to learn, rebuild some foundations I’ve forgotten, and see where the program takes me."
   },
   {
     "objectID": "posts/python-post/index.html",
@@ -68,20 +131,6 @@
     "title": "Palmer Penguins Analysis",
     "section": "Conclusion",
     "text": "Conclusion\nThe analysis shows clear physical differences between the three penguin species. Gentoo penguins are heavier on average and also have longer flippers, suggesting that body size varies substantially by species in this dataset."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html",
-    "href": "posts/first-weeks/index.html",
-    "title": "My first weeks in MDS",
-    "section": "",
-    "text": "Orientation day on campus."
-  },
-  {
-    "objectID": "posts/first-weeks/index.html#first-day-at-ubc",
-    "href": "posts/first-weeks/index.html#first-day-at-ubc",
-    "title": "My first weeks in MDS",
-    "section": "First Day at UBC",
-    "text": "First Day at UBC\nThere is something strange about becoming a student again after spending a few years working full-time.\nMy first day at UBC was mostly a combination of finding buildings, meeting people whose names I was trying very hard to remember, and slowly realizing how much I am going to have to learn this year.\nBefore coming to Vancouver, I had been working as a data engineer in Kigali. Now I am back in a classroom, beginning a master’s in data science and returning to subjects I haven’t seriously studied in a while. It is exciting, but also slightly intimidating.\nI don’t know exactly what this year will look like yet. For now, I’m excited to learn, rebuild some foundations I’ve forgotten, and see where the program takes me."
   },
   {
     "objectID": "index.html",
