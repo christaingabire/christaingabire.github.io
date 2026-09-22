@@ -6,6 +6,7 @@ dependencies = [
     "ipykernel>=7.3.0",
     "jupyter>=1.1.1",
     "jupyterlab>=4.6.4",
+    "matplotlib>=3.11.2",
     "palmerpenguins>=0.1.6",
     "pandas==3.0.5",
 ]

@@ -4,4 +4,76 @@ author: "Christa Ingabire"
 date: 2026-09-21
 ---
 
-This is the Palmer Penguins analysis in Python!
+## Introduction
+
+This analysis explores how physical characteristics differ across three
+penguin species in the Palmer Penguins dataset. I focus on body mass and
+flipper length to compare the species and look for patterns in their
+measurements.
+
+Data source: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
+Palmer Station Antarctica LTER.
+
+
+## Exploring the data
+
+I first load the dataset and inspect its structure
+
+```{python}
+#| warning: false
+#| 
+import pandas as pd
+from palmerpenguins import load_penguins
+
+penguins_data = load_penguins()
+
+penguins_data.head(10)
+```
+
+```{python}
+penguins_data.shape
+penguins_data.columns
+```
+
+The dataset contains individual penguin observations and several physical
+measurements, including body mass and flipper length.
+
+```{python}
+species_summary = (
+    penguins_data.groupby("species").agg(average_body_mass=("body_mass_g", "mean"),
+        average_flipper_length=("flipper_length_mm", "mean")
+    )
+    .round(1)
+)
+
+species_summary
+```
+
+
+The summary makes it possible to compare the typical physical measurements
+of each species rather than individual penguins.
+
+## Visualizing body mass
+
+```{python}
+#| label: fig-penguin-mass
+#| fig-cap: "Average body mass of Palmer penguins by species."
+
+species_summary["average_body_mass"].plot(
+    kind="bar",
+    ylabel="Average body mass (g)",
+    xlabel="Species"
+)
+```
+
+
+The figure shows that Gentoo penguins have the highest average body mass,
+while Adelie penguins have the lowest average body mass among the three
+species.
+
+## Conclusion
+
+The analysis shows clear physical differences between the three penguin
+species. Gentoo penguins are heavier on average and also have longer
+flippers, suggesting that body size varies substantially by species in
+this dataset.

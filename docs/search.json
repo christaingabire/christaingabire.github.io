@@ -39,7 +39,35 @@
     "href": "posts/python-post/index.html",
     "title": "Palmer Penguins Analysis",
     "section": "",
-    "text": "This is the Palmer Penguins analysis in Python!"
+    "text": "This analysis explores how physical characteristics differ across three penguin species in the Palmer Penguins dataset. I focus on body mass and flipper length to compare the species and look for patterns in their measurements.\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/python-post/index.html#introduction",
+    "href": "posts/python-post/index.html#introduction",
+    "title": "Palmer Penguins Analysis",
+    "section": "",
+    "text": "This analysis explores how physical characteristics differ across three penguin species in the Palmer Penguins dataset. I focus on body mass and flipper length to compare the species and look for patterns in their measurements.\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+  },
+  {
+    "objectID": "posts/python-post/index.html#exploring-the-data",
+    "href": "posts/python-post/index.html#exploring-the-data",
+    "title": "Palmer Penguins Analysis",
+    "section": "Exploring the data",
+    "text": "Exploring the data\nI first load the dataset and inspect its structure\n\nimport pandas as pd\nfrom palmerpenguins import load_penguins\n\npenguins_data = load_penguins()\n\npenguins_data.head(10)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n5\nAdelie\nTorgersen\n39.3\n20.6\n190.0\n3650.0\nmale\n2007\n\n\n6\nAdelie\nTorgersen\n38.9\n17.8\n181.0\n3625.0\nfemale\n2007\n\n\n7\nAdelie\nTorgersen\n39.2\n19.6\n195.0\n4675.0\nmale\n2007\n\n\n8\nAdelie\nTorgersen\n34.1\n18.1\n193.0\n3475.0\nNaN\n2007\n\n\n9\nAdelie\nTorgersen\n42.0\n20.2\n190.0\n4250.0\nNaN\n2007\n\n\n\n\n\n\n\n\npenguins_data.shape\npenguins_data.columns\n\nIndex(['species', 'island', 'bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g', 'sex', 'year'],\n      dtype='str')\n\n\nThe dataset contains individual penguin observations and several physical measurements, including body mass and flipper length.\n\nspecies_summary = (\n    penguins_data.groupby(\"species\").agg(average_body_mass=(\"body_mass_g\", \"mean\"),\n        average_flipper_length=(\"flipper_length_mm\", \"mean\")\n    )\n    .round(1)\n)\n\nspecies_summary\n\n\n\n\n\n\n\n\naverage_body_mass\naverage_flipper_length\n\n\nspecies\n\n\n\n\n\n\nAdelie\n3700.7\n190.0\n\n\nChinstrap\n3733.1\n195.8\n\n\nGentoo\n5076.0\n217.2\n\n\n\n\n\n\n\nThe summary makes it possible to compare the typical physical measurements of each species rather than individual penguins."
+  },
+  {
+    "objectID": "posts/python-post/index.html#visualizing-body-mass",
+    "href": "posts/python-post/index.html#visualizing-body-mass",
+    "title": "Palmer Penguins Analysis",
+    "section": "Visualizing body mass",
+    "text": "Visualizing body mass\n\nspecies_summary[\"average_body_mass\"].plot(\n    kind=\"bar\",\n    ylabel=\"Average body mass (g)\",\n    xlabel=\"Species\"\n)\n\n\n\n\n\n\n\nFigure 1: Average body mass of Palmer penguins by species.\n\n\n\n\n\nThe figure shows that Gentoo penguins have the highest average body mass, while Adelie penguins have the lowest average body mass among the three species."
+  },
+  {
+    "objectID": "posts/python-post/index.html#conclusion",
+    "href": "posts/python-post/index.html#conclusion",
+    "title": "Palmer Penguins Analysis",
+    "section": "Conclusion",
+    "text": "Conclusion\nThe analysis shows clear physical differences between the three penguin species. Gentoo penguins are heavier on average and also have longer flippers, suggesting that body size varies substantially by species in this dataset."
   },
   {
     "objectID": "posts/first-weeks/index.html",
