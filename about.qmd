@@ -3,18 +3,27 @@ title: "Christa Ingabire"
 ---
 
 ## Background
-I am a data scientist and data engineer currently pursuing a Master's in Data Science at the University of British Columbia. My path into data science began through computer science. I studied computer science and business analytics at Saint Mary's University of Minnesota before beginning my career in the Twin Cities.
 
-At Logisolve, a technology consulting company, I worked across software development and data-related problems, including SQL reporting systems, transactional data flows, and backend integrations.
+I am a data scientist and data engineer currently pursuing a Master's in Data Science at the University of British Columbia.
 
-I later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting large social protection programs, including health insurance and long-term savings systems.
+My path into data science began in computer science. I studied computer science and business analytics at Saint Mary's University of Minnesota before beginning my career in the Twin Cities.
+
+At Logisolve, a technology consulting company, I worked across software development and data problems, including SQL reporting systems, transactional data flows, and backend integrations.
+
+I later returned to Kigali and joined the Rwanda Social Security Board (RSSB) as a data engineer. There, I worked with administrative data supporting national social protection programs, including health insurance and long-term savings systems. Working with data at that scale made me increasingly interested not only in how data systems are built, but in the questions we try to answer with them.
 
 ## Why data science
-My experience at RSSB in Kigali changed how I thought about data. Building a reliable pipeline can tell us what happened. A dashboard can reveal where something changed. But many important questions require something more: Why did it change? Which intervention caused it? Would the same intervention work for another population?
 
-Those questions pushed my interests beyond data infrastructure toward statistics, causal reasoning, and machine learning.
+A reliable data pipeline can help us understand what happened. A dashboard can show where a pattern changed. But many of the questions I became interested in required going further.
 
-I am now developing those foundations through graduate study at UBC while continuing to explore data engineering, applied statistics, machine learning, and the design of trustworthy data systems.
+Why did an outcome change? How much of that change can reasonably be attributed to a particular intervention? Would the same relationship hold for another population?
+
+Those questions pushed my interests beyond data infrastructure toward statistics, causal inference, and machine learning.
+
+I am now developing those foundations at UBC while continuing to explore data engineering, applied statistics, machine learning, and the design of trustworthy data systems. I am particularly interested in problems where technical decisions interact with institutions and real-world consequences.
 
 ## Outside of data science
-When I am not at my desk, I am reading, writing, or always trying new cafés and restaurants wherever I am. I love connecting with people, so do not hesitate to reach out.
+
+Outside of technical work, I enjoy reading and writing, photography, and discovering cafés and restaurants in whatever city I happen to be in.
+
+I'm always happy to connect, so feel free to reach out:)

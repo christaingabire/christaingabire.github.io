@@ -1,18 +1,43 @@
 ---
-title: "My first weeks in MDS"
+title: "My First Weeks in MDS"
 author: "Christa Ingabire"
 date: 2026-09-10
 ---
 
-![Orientation day on campus.](../../images/orientation.jpeg){width=250px}
-
-## First Day at UBC
+![Orientation day on campus.](../../images/orientation.jpeg){width=350px}
 
 There is something strange about becoming a student again after spending a few years working full-time.
 
-My first day at UBC was mostly a combination of finding buildings, meeting people whose names I was trying very hard to remember, and slowly realizing how much I am going to have to learn this year.
+Before coming to Vancouver, I was working as a data engineer in Kigali. My days revolved around production data, pipelines, databases, and the practical constraints that come with maintaining systems other people depend on. Now I am back in a classroom, beginning a Master's in Data Science and returning to subjects I have not studied formally in several years.
 
-Before coming to Vancouver, I had been working as a data engineer in Kigali. Now I am back in a classroom, beginning a master’s in data science and returning to subjects I haven’t seriously studied in a while. It is exciting, but also slightly intimidating.
+## Starting again
 
+My first few days at UBC were a combination of finding buildings, meeting people whose names I was trying very hard to remember, and slowly realizing how much I am going to have to learn this year.
 
-I don’t know exactly what this year will look like yet. For now, I’m excited to learn, rebuild some foundations I’ve forgotten, and see where the program takes me.
+Returning to school after working feels different from starting university for the first time. I have more context now for why certain things matter. Concepts that once felt abstract are easier to connect to problems I have encountered at work.
+
+At the same time, there are foundations I need to rebuild.
+
+Working in industry taught me how to solve particular problems, but familiarity with tools is not the same as understanding the ideas underneath them. One of my goals this year is to become more deliberate about that distinction.
+
+## From building systems to asking questions
+
+A large part of my professional experience has been on the infrastructure side of data: getting information where it needs to go, making it reliable, and making it usable.
+
+That work also left me with questions that infrastructure alone cannot answer.
+
+It is one thing to build a pipeline that accurately reports a change in some outcome. It is another to understand why that change occurred, whether an observed relationship is meaningful, or how confidently we can generalize from the data we have.
+
+That gap is part of what brought me back to school.
+
+## What I hope to learn
+
+Over the next year, I want to strengthen my foundations in statistics and machine learning while becoming a better programmer and a more careful analyst.
+
+I am particularly interested in learning how to move between different layers of a data problem: from the systems that produce and organize data, to the statistical assumptions behind an analysis, to the decisions that eventually get made from the result.
+
+I expect some of that learning to be uncomfortable. There are already moments when I recognize a concept without being able to explain it as clearly as I would like. I am trying to treat those moments as useful information about what I need to revisit.
+
+It is still early, and I do not know exactly what this year will look like. For now, I am excited to be learning again.
+
+I plan to use this site to document some of that process: analyses, technical problems, things I misunderstood, and occasionally things that finally clicked.

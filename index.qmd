@@ -5,7 +5,10 @@ about:
   image: images/profile1.jpg
 ---
 
-Hi, I’m Christa Ingabire. I’m am currently pursuing a Master's in Data Science at the University of British Columbia. Before starting graduate school, I worked as a data engineer
-at the Rwanda Social Security Board, in Kigali, Rwanda, where I built and maintained data pipelines supporting national social protection programs. Previously, I worked in software and data consulting in Minneapolis, Minnesota, U.S.A.
+Hi, I'm Christa Ingabire. I'm currently pursuing a Master's in Data Science at the University of British Columbia.
 
-My interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when the underlying data represents people, institutions, or public systems.
+Before graduate school, I worked as a data engineer at the Rwanda Social Security Board in Kigali, where I built and maintained data pipelines supporting national social protection programs. Before that, I worked in software and data consulting in Minneapolis.
+
+My interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when data represents people, institutions, and public systems.
+
+This site is a collection of computational work, technical notes, and occasional writing as I develop those interests further.
