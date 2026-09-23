@@ -214,7 +214,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="exploring-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the data</h2>
 <p>I started by loading the data and looking at the first few rows.</p>
-<div id="b6665896" class="cell" data-execution_count="1">
+<div id="6c37b2d8" class="cell" data-execution_count="1">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> palmerpenguins <span class="im">import</span> load_penguins</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>Next, I checked the size of the dataset and the columns available.</p>
-<div id="31135315" class="cell" data-execution_count="2">
+<div id="feddbe6d" class="cell" data-execution_count="2">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Rows and columns:"</span>, penguins.shape)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>penguins.columns</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
@@ -319,7 +319,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="comparing-the-species" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-the-species">Comparing the species</h2>
 <p>I grouped the penguins by species and calculated the average body mass and flipper length for each group.</p>
-<div id="d316f03b" class="cell" data-execution_count="3">
+<div id="944e4be0" class="cell" data-execution_count="3">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>species_summary <span class="op">=</span> penguins.groupby(<span class="st">"species"</span>)[</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"body_mass_g"</span>, <span class="st">"flipper_length_mm"</span>]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>].mean()</span>
@@ -403,7 +403,7 @@ Figure&nbsp;1: Average body mass of Palmer penguins by species.
 <section id="looking-at-flipper-length" class="level2">
 <h2 class="anchored" data-anchor-id="looking-at-flipper-length">Looking at flipper length</h2>
 <p>Since Gentoo penguins were also larger in the summary table, I wanted to look at flipper length separately.</p>
-<div id="248a3e05" class="cell" data-execution_count="5">
+<div id="f64a9180" class="cell" data-execution_count="5">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>species_summary[<span class="st">"flipper_length_mm"</span>].sort_values()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>species
