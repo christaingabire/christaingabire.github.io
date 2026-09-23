@@ -1,0 +1,53 @@
+---
+title: "Passing Data Between R and Python"
+author: "Christa Ingabire"
+date: 2026-09-22
+---
+
+## R and Python in the same document
+
+For this post, I wanted to try using R and Python together instead of treating
+them as completely separate environments. I created a small data frame in R
+and then passed it to Python using `reticulate`.
+
+First, I load `reticulate`, connect it to the Python environment for this
+project, and create a small data frame in R.
+
+```{r}
+#| message: false
+#| warning: false
+
+library(reticulate)
+
+use_python(Sys.which("python"), required = TRUE)
+
+practice <- data.frame(
+  language = c("Python", "R", "SQL"),
+  hours = c(8, 5, 6)
+)
+
+practice
+```
+
+The `practice` object now exists in the R session. In a Python chunk,
+`reticulate` lets me access an R object using `r.object_name`.
+
+```{python}
+practice_python = r.practice
+
+practice_python
+```
+
+Now that the data is available in Python, I can work with it there. Here I
+create a new column showing the number of minutes practiced.
+
+```{python}
+practice_python["minutes"] = practice_python["hours"] * 60
+
+practice_python
+```
+
+The original data frame was created in R, but the final calculation happened
+in Python. This is a small example, but it shows how `reticulate` can pass
+objects between the two languages without saving and reloading a separate
+file.

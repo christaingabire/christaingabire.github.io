@@ -4,77 +4,28 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Exploring the Palmer Penguins\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nLife Expectancy Across Continents\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
+    "text": "Passing Data Between R and Python\n\n\n\n\n\n\n\n\nSep 22, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nExploring the Palmer Penguins\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nLife Expectancy Across Continents\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
   },
   {
-    "objectID": "slides/slides.html#getting-up",
-    "href": "slides/slides.html#getting-up",
-    "title": "Habits",
-    "section": "Getting up",
-    "text": "Getting up\n\nTurn off alarm\nGet out of bed"
-  },
-  {
-    "objectID": "slides/slides.html#breakfast",
-    "href": "slides/slides.html#breakfast",
-    "title": "Habits",
-    "section": "Breakfast",
-    "text": "Breakfast\n\nEat eggs\nDrink coffee"
-  },
-  {
-    "objectID": "slides/slides.html#dinner",
-    "href": "slides/slides.html#dinner",
-    "title": "Habits",
-    "section": "Dinner",
-    "text": "Dinner\n\nEat spaghetti\nDrink wine"
-  },
-  {
-    "objectID": "slides/slides.html#going-to-sleep",
-    "href": "slides/slides.html#going-to-sleep",
-    "title": "Habits",
-    "section": "Going to sleep",
-    "text": "Going to sleep\n\nGet in bed\nCount sheep"
-  },
-  {
-    "objectID": "posts/r-post/index.html",
-    "href": "posts/r-post/index.html",
-    "title": "Life Expectancy Across Continents",
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
     "section": "",
-    "text": "For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.\nI was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.\nData source: Gapminder. Free material from Gapminder, CC BY 4.0."
+    "text": "Hi, I’m Christa Ingabire. I’m currently pursuing a Master’s in Data Science at the University of British Columbia.\nBefore graduate school, I worked as a data engineer at the Rwanda Social Security Board in Kigali, where I built and maintained data pipelines supporting national social protection programs. Before that, I worked in software and data consulting in Minneapolis.\nMy interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when data represents people, institutions, and public systems.\nThis site is a collection of computational work, technical notes, and occasional writing as I develop those interests further."
   },
   {
-    "objectID": "posts/r-post/index.html#introduction",
-    "href": "posts/r-post/index.html#introduction",
-    "title": "Life Expectancy Across Continents",
+    "objectID": "posts/r-and-python/index.html",
+    "href": "posts/r-and-python/index.html",
+    "title": "Passing Data Between R and Python",
     "section": "",
-    "text": "For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.\nI was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.\nData source: Gapminder. Free material from Gapminder, CC BY 4.0."
+    "text": "For this post, I wanted to try using R and Python together instead of treating them as completely separate environments. I created a small data frame in R and then passed it to Python using reticulate.\nFirst, I load reticulate, connect it to the Python environment for this project, and create a small data frame in R.\n\nlibrary(reticulate)\n\nuse_python(Sys.which(\"python\"), required = TRUE)\n\npractice &lt;- data.frame(\n  language = c(\"Python\", \"R\", \"SQL\"),\n  hours = c(8, 5, 6)\n)\n\npractice\n\n  language hours\n1   Python     8\n2        R     5\n3      SQL     6\n\n\nThe practice object now exists in the R session. In a Python chunk, reticulate lets me access an R object using r.object_name.\n\npractice_python = r.practice\n\npractice_python\n\n  language  hours\n0   Python    8.0\n1        R    5.0\n2      SQL    6.0\n\n\nNow that the data is available in Python, I can work with it there. Here I create a new column showing the number of minutes practiced.\n\npractice_python[\"minutes\"] = practice_python[\"hours\"] * 60\n\npractice_python\n\n  language  hours  minutes\n0   Python    8.0    480.0\n1        R    5.0    300.0\n2      SQL    6.0    360.0\n\n\nThe original data frame was created in R, but the final calculation happened in Python. This is a small example, but it shows how reticulate can pass objects between the two languages without saving and reloading a separate file."
   },
   {
-    "objectID": "posts/r-post/index.html#exploring-the-data",
-    "href": "posts/r-post/index.html#exploring-the-data",
-    "title": "Life Expectancy Across Continents",
-    "section": "Exploring the data",
-    "text": "Exploring the data\nI started by loading the packages and looking at the first few rows of the dataset.\n\nlibrary(gapminder)\nlibrary(ggplot2)\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\nEach row represents a country in a particular year. For this post, I am mostly interested in continent, year, and lifeExp"
-  },
-  {
-    "objectID": "posts/r-post/index.html#comparing-continents-in-2007",
-    "href": "posts/r-post/index.html#comparing-continents-in-2007",
-    "title": "Life Expectancy Across Continents",
-    "section": "Comparing continents in 2007",
-    "text": "Comparing continents in 2007\nFirst, I checked the latest year available in the dataset and created a smaller dataset containing only observations from that year.\n\nlatest_year &lt;- max(gapminder$year)\nlatest_data &lt;- subset(gapminder, year == latest_year)\n\nlatest_year\n\n[1] 2007\n\n\nThe latest year is 2007. Next, I calculated the average life expectancy for each continent\n\nlatest_summary &lt;- aggregate(\n  lifeExp ~ continent,\n  data = latest_data,\n  FUN = mean\n)\n\nlatest_summary\n\n  continent  lifeExp\n1    Africa 54.80604\n2  Americas 73.60812\n3      Asia 70.72848\n4    Europe 77.64860\n5   Oceania 80.71950\n\n\nThere is already a noticeable difference between the continents. Oceania has the highest average life expectancy in 2007, followed by Europe, while Africa has the lowest.\nThat made me curious about whether the gap between continents had always looked this way, so I looked at the full time period next."
-  },
-  {
-    "objectID": "posts/r-post/index.html#looking-over-time",
-    "href": "posts/r-post/index.html#looking-over-time",
-    "title": "Life Expectancy Across Continents",
-    "section": "Looking over time",
-    "text": "Looking over time\nTo compare the trends, I calculated average life expectancy for each continent in each year.\n\ncontinent_year &lt;- aggregate(\n  lifeExp ~ continent + year,\n  data = gapminder,\n  FUN = mean\n)\n\nhead(continent_year)\n\n  continent year  lifeExp\n1    Africa 1952 39.13550\n2  Americas 1952 53.27984\n3      Asia 1952 46.31439\n4    Europe 1952 64.40850\n5   Oceania 1952 69.25500\n6    Africa 1957 41.26635\n\n\nNow each row represents the average for one continent in one year. I plotted those averages to make the changes easier to compare.\n\nggplot(\n  continent_year,\n  aes(x = year, y = lifeExp, color = continent)\n) +\n  geom_line(linewidth = 1.2) +\n  geom_point(size = 2) +\n  labs(\n    title = \"Life expectancy has risen across every continent\",\n    subtitle = \"Average life expectancy, 1952–2007\",\n    x = NULL,\n    y = \"Life expectancy (years)\",\n    color = \"Continent\"\n  ) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 14),\n    plot.subtitle = element_text(size = 11),\n    legend.position = \"bottom\"\n  )\n\n\n\n\n\n\n\nFigure 1: Average life expectancy by continent from 1952 to 2007."
-  },
-  {
-    "objectID": "posts/r-post/index.html#what-i-noticed",
-    "href": "posts/r-post/index.html#what-i-noticed",
-    "title": "Life Expectancy Across Continents",
-    "section": "What I noticed",
-    "text": "What I noticed\nThe graph gives a much better picture than the 2007 averages alone. Life expectancy rises across every continent, but the paths are noticeably different.\nAsia has one of the biggest changes, starting below 50 years and reaching above 70 by 2007. Europe and Oceania stay relatively high throughout the dataset, while the Americas also show a fairly steady increase.\nAfrica stands out because its trend is less consistent. Life expectancy rises for much of the period, but the line becomes much flatter around the 1990s and early 2000s before increasing again toward 2007.\nLooking at the full timeline was more useful than only comparing the final year. The averages generally moved upward, but the differences between continents were still visible at the end of the dataset."
+    "objectID": "posts/r-and-python/index.html#r-and-python-in-the-same-document",
+    "href": "posts/r-and-python/index.html#r-and-python-in-the-same-document",
+    "title": "Passing Data Between R and Python",
+    "section": "",
+    "text": "For this post, I wanted to try using R and Python together instead of treating them as completely separate environments. I created a small data frame in R and then passed it to Python using reticulate.\nFirst, I load reticulate, connect it to the Python environment for this project, and create a small data frame in R.\n\nlibrary(reticulate)\n\nuse_python(Sys.which(\"python\"), required = TRUE)\n\npractice &lt;- data.frame(\n  language = c(\"Python\", \"R\", \"SQL\"),\n  hours = c(8, 5, 6)\n)\n\npractice\n\n  language hours\n1   Python     8\n2        R     5\n3      SQL     6\n\n\nThe practice object now exists in the R session. In a Python chunk, reticulate lets me access an R object using r.object_name.\n\npractice_python = r.practice\n\npractice_python\n\n  language  hours\n0   Python    8.0\n1        R    5.0\n2      SQL    6.0\n\n\nNow that the data is available in Python, I can work with it there. Here I create a new column showing the number of minutes practiced.\n\npractice_python[\"minutes\"] = practice_python[\"hours\"] * 60\n\npractice_python\n\n  language  hours  minutes\n0   Python    8.0    480.0\n1        R    5.0    300.0\n2      SQL    6.0    360.0\n\n\nThe original data frame was created in R, but the final calculation happened in Python. This is a small example, but it shows how reticulate can pass objects between the two languages without saving and reloading a separate file."
   },
   {
     "objectID": "posts/first-weeks/index.html",
@@ -154,11 +105,46 @@
     "text": "What I noticed\nThe species differ quite a bit in both measurements. Gentoo penguins are the heaviest of the three on average and also have the longest flippers. Adelie penguins are smaller on both measurements, with Chinstrap penguins falling between them.\nThis is a small analysis, but it was a useful way to see how grouping the data can make differences between categories much easier to spot."
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Home",
+    "objectID": "posts/r-post/index.html",
+    "href": "posts/r-post/index.html",
+    "title": "Life Expectancy Across Continents",
     "section": "",
-    "text": "Hi, I’m Christa Ingabire. I’m currently pursuing a Master’s in Data Science at the University of British Columbia.\nBefore graduate school, I worked as a data engineer at the Rwanda Social Security Board in Kigali, where I built and maintained data pipelines supporting national social protection programs. Before that, I worked in software and data consulting in Minneapolis.\nMy interests sit at the intersection of data engineering, statistical learning, machine learning, and applied data science, particularly when data represents people, institutions, and public systems.\nThis site is a collection of computational work, technical notes, and occasional writing as I develop those interests further."
+    "text": "For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.\nI was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.\nData source: Gapminder. Free material from Gapminder, CC BY 4.0."
+  },
+  {
+    "objectID": "posts/r-post/index.html#introduction",
+    "href": "posts/r-post/index.html#introduction",
+    "title": "Life Expectancy Across Continents",
+    "section": "",
+    "text": "For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.\nI was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.\nData source: Gapminder. Free material from Gapminder, CC BY 4.0."
+  },
+  {
+    "objectID": "posts/r-post/index.html#exploring-the-data",
+    "href": "posts/r-post/index.html#exploring-the-data",
+    "title": "Life Expectancy Across Continents",
+    "section": "Exploring the data",
+    "text": "Exploring the data\nI started by loading the packages and looking at the first few rows of the dataset.\n\nlibrary(gapminder)\nlibrary(ggplot2)\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\nEach row represents a country in a particular year. For this post, I am mostly interested in continent, year, and lifeExp"
+  },
+  {
+    "objectID": "posts/r-post/index.html#comparing-continents-in-2007",
+    "href": "posts/r-post/index.html#comparing-continents-in-2007",
+    "title": "Life Expectancy Across Continents",
+    "section": "Comparing continents in 2007",
+    "text": "Comparing continents in 2007\nFirst, I checked the latest year available in the dataset and created a smaller dataset containing only observations from that year.\n\nlatest_year &lt;- max(gapminder$year)\nlatest_data &lt;- subset(gapminder, year == latest_year)\n\nlatest_year\n\n[1] 2007\n\n\nThe latest year is 2007. Next, I calculated the average life expectancy for each continent\n\nlatest_summary &lt;- aggregate(\n  lifeExp ~ continent,\n  data = latest_data,\n  FUN = mean\n)\n\nlatest_summary\n\n  continent  lifeExp\n1    Africa 54.80604\n2  Americas 73.60812\n3      Asia 70.72848\n4    Europe 77.64860\n5   Oceania 80.71950\n\n\nThere is already a noticeable difference between the continents. Oceania has the highest average life expectancy in 2007, followed by Europe, while Africa has the lowest.\nThat made me curious about whether the gap between continents had always looked this way, so I looked at the full time period next."
+  },
+  {
+    "objectID": "posts/r-post/index.html#looking-over-time",
+    "href": "posts/r-post/index.html#looking-over-time",
+    "title": "Life Expectancy Across Continents",
+    "section": "Looking over time",
+    "text": "Looking over time\nTo compare the trends, I calculated average life expectancy for each continent in each year.\n\ncontinent_year &lt;- aggregate(\n  lifeExp ~ continent + year,\n  data = gapminder,\n  FUN = mean\n)\n\nhead(continent_year)\n\n  continent year  lifeExp\n1    Africa 1952 39.13550\n2  Americas 1952 53.27984\n3      Asia 1952 46.31439\n4    Europe 1952 64.40850\n5   Oceania 1952 69.25500\n6    Africa 1957 41.26635\n\n\nNow each row represents the average for one continent in one year. I plotted those averages to make the changes easier to compare.\n\nggplot(\n  continent_year,\n  aes(x = year, y = lifeExp, color = continent)\n) +\n  geom_line(linewidth = 1.2) +\n  geom_point(size = 2) +\n  labs(\n    title = \"Life expectancy has risen across every continent\",\n    subtitle = \"Average life expectancy, 1952–2007\",\n    x = NULL,\n    y = \"Life expectancy (years)\",\n    color = \"Continent\"\n  ) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 14),\n    plot.subtitle = element_text(size = 11),\n    legend.position = \"bottom\"\n  )\n\n\n\n\n\n\n\nFigure 1: Average life expectancy by continent from 1952 to 2007."
+  },
+  {
+    "objectID": "posts/r-post/index.html#what-i-noticed",
+    "href": "posts/r-post/index.html#what-i-noticed",
+    "title": "Life Expectancy Across Continents",
+    "section": "What I noticed",
+    "text": "What I noticed\nThe graph gives a much better picture than the 2007 averages alone. Life expectancy rises across every continent, but the paths are noticeably different.\nAsia has one of the biggest changes, starting below 50 years and reaching above 70 by 2007. Europe and Oceania stay relatively high throughout the dataset, while the Americas also show a fairly steady increase.\nAfrica stands out because its trend is less consistent. Life expectancy rises for much of the period, but the line becomes much flatter around the 1990s and early 2000s before increasing again toward 2007.\nLooking at the full timeline was more useful than only comparing the final year. The averages generally moved upward, but the differences between continents were still visible at the end of the dataset."
   },
   {
     "objectID": "about.html",

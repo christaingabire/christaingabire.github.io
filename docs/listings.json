@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/r-and-python/index.html",
       "/posts/python-post/index.html",
       "/posts/r-post/index.html",
       "/posts/first-weeks/index.html"
