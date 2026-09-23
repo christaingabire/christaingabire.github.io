@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "Blog",
     "section": "",
-    "text": "Palmer Penguins Analysis\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nLife Expectancy Across Continents\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
+    "text": "Exploring the Palmer Penguins\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nLife Expectancy Across Continents\n\n\n\n\n\n\n\n\nSep 21, 2026\n\n\nChrista Ingabire\n\n\n\n\n\n\n\n\n\n\n\n\nMy First Weeks in MDS\n\n\n\n\n\n\n\n\nSep 10, 2026\n\n\nChrista Ingabire\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides/slides.html#getting-up",
@@ -39,49 +39,42 @@
     "href": "posts/r-post/index.html",
     "title": "Life Expectancy Across Continents",
     "section": "",
-    "text": "Life expectancy is one way of summarizing differences in population health across countries and over time. In this analysis, I use the Gapminder dataset to explore how average life expectancy differs across continents and how those differences changed between 1952 and 2007.\nThe analysis focuses on two questions:\n\nHow does average life expectancy compare across continents in the most recent year available?\nHow has average life expectancy changed across continents over time?\n\nData source: Gapminder"
+    "text": "For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.\nI was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.\nData source: Gapminder. Free material from Gapminder, CC BY 4.0."
   },
   {
     "objectID": "posts/r-post/index.html#introduction",
     "href": "posts/r-post/index.html#introduction",
     "title": "Life Expectancy Across Continents",
     "section": "",
-    "text": "Life expectancy is one way of summarizing differences in population health across countries and over time. In this analysis, I use the Gapminder dataset to explore how average life expectancy differs across continents and how those differences changed between 1952 and 2007.\nThe analysis focuses on two questions:\n\nHow does average life expectancy compare across continents in the most recent year available?\nHow has average life expectancy changed across continents over time?\n\nData source: Gapminder"
+    "text": "For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.\nI was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.\nData source: Gapminder. Free material from Gapminder, CC BY 4.0."
   },
   {
     "objectID": "posts/r-post/index.html#exploring-the-data",
     "href": "posts/r-post/index.html#exploring-the-data",
     "title": "Life Expectancy Across Continents",
     "section": "Exploring the data",
-    "text": "Exploring the data\nThe Gapminder dataset contains country-level observations for population, life expectancy, and GDP per capita across multiple years. I first load the packages and inspect the first few observations\n\nlibrary(gapminder)\nlibrary(ggplot2)\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\nEach row represents a country in a particular year. For this analysis, the most important variables are continent, year, and lifeExp"
+    "text": "Exploring the data\nI started by loading the packages and looking at the first few rows of the dataset.\n\nlibrary(gapminder)\nlibrary(ggplot2)\n\nhead(gapminder)\n\n# A tibble: 6 × 6\n  country     continent  year lifeExp      pop gdpPercap\n  &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;\n1 Afghanistan Asia       1952    28.8  8425333      779.\n2 Afghanistan Asia       1957    30.3  9240934      821.\n3 Afghanistan Asia       1962    32.0 10267083      853.\n4 Afghanistan Asia       1967    34.0 11537966      836.\n5 Afghanistan Asia       1972    36.1 13079460      740.\n6 Afghanistan Asia       1977    38.4 14880372      786.\n\n\nEach row represents a country in a particular year. For this post, I am mostly interested in continent, year, and lifeExp"
   },
   {
-    "objectID": "posts/r-post/index.html#life-expectancy-in-the-most-recent-year",
-    "href": "posts/r-post/index.html#life-expectancy-in-the-most-recent-year",
+    "objectID": "posts/r-post/index.html#comparing-continents-in-2007",
+    "href": "posts/r-post/index.html#comparing-continents-in-2007",
     "title": "Life Expectancy Across Continents",
-    "section": "Life expectancy in the most recent year",
-    "text": "Life expectancy in the most recent year\nBefore comparing continents, I identify the most recent year represented in the dataset\n\nlatest_year &lt;- max(gapminder$year)\n\nlatest_year\n\n[1] 2007\n\n\nThe most recent year in the dataset is 2007. I then restrict the data to that year and calculate the mean life expectancy for each continent\n\nlatest_summary &lt;- gapminder |&gt;\n  subset(year == latest_year) |&gt;\n  aggregate(lifeExp ~ continent, data = _, FUN = mean)\n\nlatest_summary\n\n  continent  lifeExp\n1    Africa 54.80604\n2  Americas 73.60812\n3      Asia 70.72848\n4    Europe 77.64860\n5   Oceania 80.71950\n\n\nThe results show substantial differences in average life expectancy across continents in 2007. Oceania has the highest average life expectancy, followed by Europe, while Africa has the lowest average among the continents represented in the dataset\nHowever, this comparison only shows one point in time. Looking across the full time period gives a better picture of how these differences developed"
+    "section": "Comparing continents in 2007",
+    "text": "Comparing continents in 2007\nFirst, I checked the latest year available in the dataset and created a smaller dataset containing only observations from that year.\n\nlatest_year &lt;- max(gapminder$year)\nlatest_data &lt;- subset(gapminder, year == latest_year)\n\nlatest_year\n\n[1] 2007\n\n\nThe latest year is 2007. Next, I calculated the average life expectancy for each continent\n\nlatest_summary &lt;- aggregate(\n  lifeExp ~ continent,\n  data = latest_data,\n  FUN = mean\n)\n\nlatest_summary\n\n  continent  lifeExp\n1    Africa 54.80604\n2  Americas 73.60812\n3      Asia 70.72848\n4    Europe 77.64860\n5   Oceania 80.71950\n\n\nThere is already a noticeable difference between the continents. Oceania has the highest average life expectancy in 2007, followed by Europe, while Africa has the lowest.\nThat made me curious about whether the gap between continents had always looked this way, so I looked at the full time period next."
   },
   {
-    "objectID": "posts/r-post/index.html#life-expectancy-over-time",
-    "href": "posts/r-post/index.html#life-expectancy-over-time",
+    "objectID": "posts/r-post/index.html#looking-over-time",
+    "href": "posts/r-post/index.html#looking-over-time",
     "title": "Life Expectancy Across Continents",
-    "section": "Life expectancy over time",
-    "text": "Life expectancy over time\nTo examine change over time, I calculate the mean life expectancy for every continent in each year\n\ncontinent_year &lt;- aggregate(\n  lifeExp ~ continent + year,\n  data = gapminder,\n  FUN = mean\n)\n\nhead(continent_year)\n\n  continent year  lifeExp\n1    Africa 1952 39.13550\n2  Americas 1952 53.27984\n3      Asia 1952 46.31439\n4    Europe 1952 64.40850\n5   Oceania 1952 69.25500\n6    Africa 1957 41.26635\n\n\nThis produces one average for each continent-year combination, allowing the changes in life expectancy to be compared across the full period\n\nggplot(\n  continent_year,\n  aes(x = year, y = lifeExp, color = continent)\n) +\n  geom_line(linewidth = 1) +\n  labs(\n    x = \"Year\",\n    y = \"Average life expectancy\",\n    color = \"Continent\"\n  ) +\n  theme_minimal()\n\n\n\n\n\n\n\nFigure 1: Average life expectancy by continent from 1952 to 2007."
+    "section": "Looking over time",
+    "text": "Looking over time\nTo compare the trends, I calculated average life expectancy for each continent in each year.\n\ncontinent_year &lt;- aggregate(\n  lifeExp ~ continent + year,\n  data = gapminder,\n  FUN = mean\n)\n\nhead(continent_year)\n\n  continent year  lifeExp\n1    Africa 1952 39.13550\n2  Americas 1952 53.27984\n3      Asia 1952 46.31439\n4    Europe 1952 64.40850\n5   Oceania 1952 69.25500\n6    Africa 1957 41.26635\n\n\nNow each row represents the average for one continent in one year. I plotted those averages to make the changes easier to compare.\n\nggplot(\n  continent_year,\n  aes(x = year, y = lifeExp, color = continent)\n) +\n  geom_line(linewidth = 1.2) +\n  geom_point(size = 2) +\n  labs(\n    title = \"Life expectancy has risen across every continent\",\n    subtitle = \"Average life expectancy, 1952–2007\",\n    x = NULL,\n    y = \"Life expectancy (years)\",\n    color = \"Continent\"\n  ) +\n  theme_minimal() +\n  theme(\n    plot.title = element_text(face = \"bold\", size = 14),\n    plot.subtitle = element_text(size = 11),\n    legend.position = \"bottom\"\n  )\n\n\n\n\n\n\n\nFigure 1: Average life expectancy by continent from 1952 to 2007."
   },
   {
-    "objectID": "posts/r-post/index.html#findings",
-    "href": "posts/r-post/index.html#findings",
+    "objectID": "posts/r-post/index.html#what-i-noticed",
+    "href": "posts/r-post/index.html#what-i-noticed",
     "title": "Life Expectancy Across Continents",
-    "section": "Findings",
-    "text": "Findings\nAverage life expectancy generally increases across all five continents over the period shown. The size and pattern of that increase, however, differ between continents\nOceania and Europe remain among the continents with the highest average life expectancy throughout the period. Asia shows a substantial increase, moving from an average below 50 years in the early part of the dataset to above 70 years by 2007. The Americas also show a steady upward trend\nAfrica follows a different pattern. Average life expectancy increases for much of the period but changes relatively little during the 1990s and early 2000s before increasing again by 2007. It remains below the averages of the other continents throughout the dataset"
-  },
-  {
-    "objectID": "posts/r-post/index.html#conclusion",
-    "href": "posts/r-post/index.html#conclusion",
-    "title": "Life Expectancy Across Continents",
-    "section": "Conclusion",
-    "text": "Conclusion\nThe Gapminder data show that average life expectancy increased across all continents between 1952 and 2007, but the differences between continents did not disappear. The analysis also demonstrates why examining a trend over time can reveal information that a single-year comparison cannot.\nThese results are descriptive. They show patterns in the Gapminder data but do not establish why the differences between continents exist or what caused life expectancy to change over time."
+    "section": "What I noticed",
+    "text": "What I noticed\nThe graph gives a much better picture than the 2007 averages alone. Life expectancy rises across every continent, but the paths are noticeably different.\nAsia has one of the biggest changes, starting below 50 years and reaching above 70 by 2007. Europe and Oceania stay relatively high throughout the dataset, while the Americas also show a fairly steady increase.\nAfrica stands out because its trend is less consistent. Life expectancy rises for much of the period, but the line becomes much flatter around the 1990s and early 2000s before increasing again toward 2007.\nLooking at the full timeline was more useful than only comparing the final year. The averages generally moved upward, but the differences between continents were still visible at the end of the dataset."
   },
   {
     "objectID": "posts/first-weeks/index.html",
@@ -114,37 +107,51 @@
   {
     "objectID": "posts/python-post/index.html",
     "href": "posts/python-post/index.html",
-    "title": "Palmer Penguins Analysis",
+    "title": "Exploring the Palmer Penguins",
     "section": "",
-    "text": "This analysis explores how physical characteristics differ across three penguin species in the Palmer Penguins dataset. I focus on body mass and flipper length to compare the species and look for patterns in their measurements.\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+    "text": "For this post, I wanted to see how some basic physical measurements differ between the three penguin species in the Palmer Penguins dataset. I focused on body mass and flipper length because both give a simple way to compare the species.\nData source: Palmer Penguins, Palmer Station Antarctica LTER. Data are available under a CC0 license."
   },
   {
     "objectID": "posts/python-post/index.html#introduction",
     "href": "posts/python-post/index.html#introduction",
-    "title": "Palmer Penguins Analysis",
+    "title": "Exploring the Palmer Penguins",
     "section": "",
-    "text": "This analysis explores how physical characteristics differ across three penguin species in the Palmer Penguins dataset. I focus on body mass and flipper length to compare the species and look for patterns in their measurements.\nData source: Palmer Penguins, Palmer Station Antarctica LTER."
+    "text": "For this post, I wanted to see how some basic physical measurements differ between the three penguin species in the Palmer Penguins dataset. I focused on body mass and flipper length because both give a simple way to compare the species.\nData source: Palmer Penguins, Palmer Station Antarctica LTER. Data are available under a CC0 license."
   },
   {
     "objectID": "posts/python-post/index.html#exploring-the-data",
     "href": "posts/python-post/index.html#exploring-the-data",
-    "title": "Palmer Penguins Analysis",
+    "title": "Exploring the Palmer Penguins",
     "section": "Exploring the data",
-    "text": "Exploring the data\nI first load the dataset and inspect its structure\n\nimport pandas as pd\nfrom palmerpenguins import load_penguins\n\npenguins_data = load_penguins()\n\npenguins_data.head(10)\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n5\nAdelie\nTorgersen\n39.3\n20.6\n190.0\n3650.0\nmale\n2007\n\n\n6\nAdelie\nTorgersen\n38.9\n17.8\n181.0\n3625.0\nfemale\n2007\n\n\n7\nAdelie\nTorgersen\n39.2\n19.6\n195.0\n4675.0\nmale\n2007\n\n\n8\nAdelie\nTorgersen\n34.1\n18.1\n193.0\n3475.0\nNaN\n2007\n\n\n9\nAdelie\nTorgersen\n42.0\n20.2\n190.0\n4250.0\nNaN\n2007\n\n\n\n\n\n\n\n\npenguins_data.shape\npenguins_data.columns\n\nIndex(['species', 'island', 'bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g', 'sex', 'year'],\n      dtype='str')\n\n\nThe dataset contains individual penguin observations and several physical measurements, including body mass and flipper length.\n\nspecies_summary = (\n    penguins_data.groupby(\"species\").agg(average_body_mass=(\"body_mass_g\", \"mean\"),\n        average_flipper_length=(\"flipper_length_mm\", \"mean\")\n    )\n    .round(1)\n)\n\nspecies_summary\n\n\n\n\n\n\n\n\naverage_body_mass\naverage_flipper_length\n\n\nspecies\n\n\n\n\n\n\nAdelie\n3700.7\n190.0\n\n\nChinstrap\n3733.1\n195.8\n\n\nGentoo\n5076.0\n217.2\n\n\n\n\n\n\n\nThe summary makes it possible to compare the typical physical measurements of each species rather than individual penguins."
+    "text": "Exploring the data\nI started by loading the data and looking at the first few rows.\n\nimport pandas as pd\nfrom palmerpenguins import load_penguins\n\npenguins = load_penguins()\n\npenguins.head()\n\n\n\n\n\n\n\n\nspecies\nisland\nbill_length_mm\nbill_depth_mm\nflipper_length_mm\nbody_mass_g\nsex\nyear\n\n\n\n\n0\nAdelie\nTorgersen\n39.1\n18.7\n181.0\n3750.0\nmale\n2007\n\n\n1\nAdelie\nTorgersen\n39.5\n17.4\n186.0\n3800.0\nfemale\n2007\n\n\n2\nAdelie\nTorgersen\n40.3\n18.0\n195.0\n3250.0\nfemale\n2007\n\n\n3\nAdelie\nTorgersen\nNaN\nNaN\nNaN\nNaN\nNaN\n2007\n\n\n4\nAdelie\nTorgersen\n36.7\n19.3\n193.0\n3450.0\nfemale\n2007\n\n\n\n\n\n\n\nNext, I checked the size of the dataset and the columns available.\n\nprint(\"Rows and columns:\", penguins.shape)\npenguins.columns\n\nRows and columns: (344, 8)\n\n\nIndex(['species', 'island', 'bill_length_mm', 'bill_depth_mm',\n       'flipper_length_mm', 'body_mass_g', 'sex', 'year'],\n      dtype='str')\n\n\nThere are several measurements available, but for this post I am mainly interested in species, body_mass_g, and flipper_length_mm."
+  },
+  {
+    "objectID": "posts/python-post/index.html#comparing-the-species",
+    "href": "posts/python-post/index.html#comparing-the-species",
+    "title": "Exploring the Palmer Penguins",
+    "section": "Comparing the species",
+    "text": "Comparing the species\nI grouped the penguins by species and calculated the average body mass and flipper length for each group.\n\nspecies_summary = penguins.groupby(\"species\")[\n    [\"body_mass_g\", \"flipper_length_mm\"]\n].mean()\n\nspecies_summary = species_summary.round(1)\n\nspecies_summary\n\n\n\n\n\n\n\n\nbody_mass_g\nflipper_length_mm\n\n\nspecies\n\n\n\n\n\n\nAdelie\n3700.7\n190.0\n\n\nChinstrap\n3733.1\n195.8\n\n\nGentoo\n5076.0\n217.2\n\n\n\n\n\n\n\nThis gives me one row for each species instead of one row for each individual penguin. The differences are already pretty noticeable, especially for Gentoo penguins."
   },
   {
     "objectID": "posts/python-post/index.html#visualizing-body-mass",
     "href": "posts/python-post/index.html#visualizing-body-mass",
-    "title": "Palmer Penguins Analysis",
+    "title": "Exploring the Palmer Penguins",
     "section": "Visualizing body mass",
-    "text": "Visualizing body mass\n\nspecies_summary[\"average_body_mass\"].plot(\n    kind=\"bar\",\n    ylabel=\"Average body mass (g)\",\n    xlabel=\"Species\"\n)\n\n\n\n\n\n\n\nFigure 1: Average body mass of Palmer penguins by species.\n\n\n\n\n\nThe figure shows that Gentoo penguins have the highest average body mass, while Adelie penguins have the lowest average body mass among the three species."
+    "text": "Visualizing body mass\nI used the species averages to compare body mass visually.\n\nimport matplotlib.pyplot as plt\n\nspecies_summary[\"body_mass_g\"].plot(\n    kind=\"bar\",\n    figsize=(7, 4)\n)\n\nplt.title(\"Gentoo penguins are heavier on average\")\nplt.xlabel(\"Species\")\nplt.ylabel(\"Average body mass (g)\")\nplt.xticks(rotation=0)\nplt.tight_layout()\nplt.show()\n\n\n\n\n\n\n\nFigure 1: Average body mass of Palmer penguins by species.\n\n\n\n\n\nGentoo penguins stand out immediately. Their average body mass is much higher than the other two species, while Adelie penguins have the lowest average."
   },
   {
-    "objectID": "posts/python-post/index.html#conclusion",
-    "href": "posts/python-post/index.html#conclusion",
-    "title": "Palmer Penguins Analysis",
-    "section": "Conclusion",
-    "text": "Conclusion\nThe analysis shows clear physical differences between the three penguin species. Gentoo penguins are heavier on average and also have longer flippers, suggesting that body size varies substantially by species in this dataset."
+    "objectID": "posts/python-post/index.html#looking-at-flipper-length",
+    "href": "posts/python-post/index.html#looking-at-flipper-length",
+    "title": "Exploring the Palmer Penguins",
+    "section": "Looking at flipper length",
+    "text": "Looking at flipper length\nSince Gentoo penguins were also larger in the summary table, I wanted to look at flipper length separately.\n\nspecies_summary[\"flipper_length_mm\"].sort_values()\n\nspecies\nAdelie       190.0\nChinstrap    195.8\nGentoo       217.2\nName: flipper_length_mm, dtype: float64\n\n\nThe same general pattern appears here. Gentoo penguins have the longest flippers on average, while Adelie penguins have the shortest."
+  },
+  {
+    "objectID": "posts/python-post/index.html#what-i-noticed",
+    "href": "posts/python-post/index.html#what-i-noticed",
+    "title": "Exploring the Palmer Penguins",
+    "section": "What I noticed",
+    "text": "What I noticed\nThe species differ quite a bit in both measurements. Gentoo penguins are the heaviest of the three on average and also have the longest flippers. Adelie penguins are smaller on both measurements, with Chinstrap penguins falling between them.\nThis is a small analysis, but it was a useful way to see how grouping the data can make differences between categories much easier to spot."
   },
   {
     "objectID": "index.html",

@@ -162,10 +162,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#exploring-the-data" id="toc-exploring-the-data" class="nav-link" data-scroll-target="#exploring-the-data">Exploring the data</a></li>
-  <li><a href="#life-expectancy-in-the-most-recent-year" id="toc-life-expectancy-in-the-most-recent-year" class="nav-link" data-scroll-target="#life-expectancy-in-the-most-recent-year">Life expectancy in the most recent year</a></li>
-  <li><a href="#life-expectancy-over-time" id="toc-life-expectancy-over-time" class="nav-link" data-scroll-target="#life-expectancy-over-time">Life expectancy over time</a></li>
-  <li><a href="#findings" id="toc-findings" class="nav-link" data-scroll-target="#findings">Findings</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#comparing-continents-in-2007" id="toc-comparing-continents-in-2007" class="nav-link" data-scroll-target="#comparing-continents-in-2007">Comparing continents in 2007</a></li>
+  <li><a href="#looking-over-time" id="toc-looking-over-time" class="nav-link" data-scroll-target="#looking-over-time">Looking over time</a></li>
+  <li><a href="#what-i-noticed" id="toc-what-i-noticed" class="nav-link" data-scroll-target="#what-i-noticed">What I noticed</a></li>
   </ul>
 </nav>
     </div>
@@ -205,17 +204,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Life expectancy is one way of summarizing differences in population health across countries and over time. In this analysis, I use the Gapminder dataset to explore how average life expectancy differs across continents and how those differences changed between 1952 and 2007.</p>
-<p>The analysis focuses on two questions:</p>
-<ol type="1">
-<li>How does average life expectancy compare across continents in the most recent year available?</li>
-<li>How has average life expectancy changed across continents over time?</li>
-</ol>
-<p>Data source: <a href="https://www.gapminder.org/">Gapminder</a></p>
+<p>For this post, I wanted to look at how life expectancy has changed across different parts of the world. I used the Gapminder dataset, which contains country-level data on life expectancy, population, and GDP per capita over several decades.</p>
+<p>I was mainly interested in two things: how continents compare in the latest year available, and whether those differences look the same when viewed over time.</p>
+<p>Data source: <a href="https://www.gapminder.org/">Gapminder</a>. Free material from Gapminder, CC BY 4.0.</p>
 </section>
 <section id="exploring-the-data" class="level2">
 <h2 class="anchored" data-anchor-id="exploring-the-data">Exploring the data</h2>
-<p>The Gapminder dataset contains country-level observations for population, life expectancy, and GDP per capita across multiple years. I first load the packages and inspect the first few observations</p>
+<p>I started by loading the packages and looking at the first few rows of the dataset.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gapminder)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -233,26 +228,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
 </div>
 </div>
-<p>Each row represents a country in a particular year. For this analysis, the most important variables are continent, year, and lifeExp</p>
+<p>Each row represents a country in a particular year. For this post, I am mostly interested in <code>continent</code>, <code>year</code>, and <code>lifeExp</code></p>
 </section>
-<section id="life-expectancy-in-the-most-recent-year" class="level2">
-<h2 class="anchored" data-anchor-id="life-expectancy-in-the-most-recent-year">Life expectancy in the most recent year</h2>
-<p>Before comparing continents, I identify the most recent year represented in the dataset</p>
+<section id="comparing-continents-in-2007" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-continents-in-2007">Comparing continents in 2007</h2>
+<p>First, I checked the latest year available in the dataset and created a smaller dataset containing only observations from that year.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>latest_year <span class="ot">&lt;-</span> <span class="fu">max</span>(gapminder<span class="sc">$</span>year)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>latest_year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>latest_data <span class="ot">&lt;-</span> <span class="fu">subset</span>(gapminder, year <span class="sc">==</span> latest_year)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>latest_year</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2007</code></pre>
 </div>
 </div>
-<p>The most recent year in the dataset is 2007. I then restrict the data to that year and calculate the mean life expectancy for each continent</p>
+<p>The latest year is 2007. Next, I calculated the average life expectancy for each continent</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>latest_summary <span class="ot">&lt;-</span> gapminder <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(year <span class="sc">==</span> latest_year) <span class="sc">|&gt;</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aggregate</span>(lifeExp <span class="sc">~</span> continent, <span class="at">data =</span> _, <span class="at">FUN =</span> mean)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>latest_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>latest_summary <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  lifeExp <span class="sc">~</span> continent,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> latest_data,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> mean</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>latest_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  continent  lifeExp
 1    Africa 54.80604
@@ -262,12 +260,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 5   Oceania 80.71950</code></pre>
 </div>
 </div>
-<p>The results show substantial differences in average life expectancy across continents in 2007. Oceania has the highest average life expectancy, followed by Europe, while Africa has the lowest average among the continents represented in the dataset</p>
-<p>However, this comparison only shows one point in time. Looking across the full time period gives a better picture of how these differences developed</p>
+<p>There is already a noticeable difference between the continents. Oceania has the highest average life expectancy in 2007, followed by Europe, while Africa has the lowest.</p>
+<p>That made me curious about whether the gap between continents had always looked this way, so I looked at the full time period next.</p>
 </section>
-<section id="life-expectancy-over-time" class="level2">
-<h2 class="anchored" data-anchor-id="life-expectancy-over-time">Life expectancy over time</h2>
-<p>To examine change over time, I calculate the mean life expectancy for every continent in each year</p>
+<section id="looking-over-time" class="level2">
+<h2 class="anchored" data-anchor-id="looking-over-time">Looking over time</h2>
+<p>To compare the trends, I calculated average life expectancy for each continent in each year.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>continent_year <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  lifeExp <span class="sc">~</span> continent <span class="sc">+</span> year,</span>
@@ -286,19 +284,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 6    Africa 1957 41.26635</code></pre>
 </div>
 </div>
-<p>This produces one average for each continent-year combination, allowing the changes in life expectancy to be compared across the full period</p>
+<p>Now each row represents the average for one continent in one year. I plotted those averages to make the changes easier to compare.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  continent_year,</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> lifeExp, <span class="at">color =</span> continent)</span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Year"</span>,</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average life expectancy"</span>,</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Continent"</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Life expectancy has risen across every continent"</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Average life expectancy, 1952–2007"</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Life expectancy (years)"</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Continent"</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">11</span>),</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"bottom"</span></span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <div id="fig-life-expectancy" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -313,16 +319,12 @@ Figure&nbsp;1: Average life expectancy by continent from 1952 to 2007.
 </div>
 </div>
 </section>
-<section id="findings" class="level2">
-<h2 class="anchored" data-anchor-id="findings">Findings</h2>
-<p>Average life expectancy generally increases across all five continents over the period shown. The size and pattern of that increase, however, differ between continents</p>
-<p>Oceania and Europe remain among the continents with the highest average life expectancy throughout the period. Asia shows a substantial increase, moving from an average below 50 years in the early part of the dataset to above 70 years by 2007. The Americas also show a steady upward trend</p>
-<p>Africa follows a different pattern. Average life expectancy increases for much of the period but changes relatively little during the 1990s and early 2000s before increasing again by 2007. It remains below the averages of the other continents throughout the dataset</p>
-</section>
-<section id="conclusion" class="level2">
-<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
-<p>The Gapminder data show that average life expectancy increased across all continents between 1952 and 2007, but the differences between continents did not disappear. The analysis also demonstrates why examining a trend over time can reveal information that a single-year comparison cannot.</p>
-<p>These results are descriptive. They show patterns in the Gapminder data but do not establish why the differences between continents exist or what caused life expectancy to change over time.</p>
+<section id="what-i-noticed" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-noticed">What I noticed</h2>
+<p>The graph gives a much better picture than the 2007 averages alone. Life expectancy rises across every continent, but the paths are noticeably different.</p>
+<p>Asia has one of the biggest changes, starting below 50 years and reaching above 70 by 2007. Europe and Oceania stay relatively high throughout the dataset, while the Americas also show a fairly steady increase.</p>
+<p>Africa stands out because its trend is less consistent. Life expectancy rises for much of the period, but the line becomes much flatter around the 1990s and early 2000s before increasing again toward 2007.</p>
+<p>Looking at the full timeline was more useful than only comparing the final year. The averages generally moved upward, but the differences between continents were still visible at the end of the dataset.</p>
 
 
 </section>

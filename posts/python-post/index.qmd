@@ -1,79 +1,107 @@
 ---
-title: "Palmer Penguins Analysis"
+title: "Exploring the Palmer Penguins"
 author: "Christa Ingabire"
 date: 2026-09-21
 ---
 
 ## Introduction
 
-This analysis explores how physical characteristics differ across three
-penguin species in the Palmer Penguins dataset. I focus on body mass and
-flipper length to compare the species and look for patterns in their
-measurements.
+For this post, I wanted to see how some basic physical measurements differ
+between the three penguin species in the Palmer Penguins dataset. I focused on
+body mass and flipper length because both give a simple way to compare the
+species.
 
 Data source: [Palmer Penguins](https://allisonhorst.github.io/palmerpenguins/),
-Palmer Station Antarctica LTER.
-
+Palmer Station Antarctica LTER. Data are available under a CC0 license.
 
 ## Exploring the data
 
-I first load the dataset and inspect its structure
+I started by loading the data and looking at the first few rows.
 
 ```{python}
 #| warning: false
-#| 
+
 import pandas as pd
 from palmerpenguins import load_penguins
 
-penguins_data = load_penguins()
+penguins = load_penguins()
 
-penguins_data.head(10)
+penguins.head()
 ```
 
+Next, I checked the size of the dataset and the columns available.
+
 ```{python}
-penguins_data.shape
-penguins_data.columns
+print("Rows and columns:", penguins.shape)
+penguins.columns
 ```
 
-The dataset contains individual penguin observations and several physical
-measurements, including body mass and flipper length.
+There are several measurements available, but for this post I am mainly
+interested in `species`, `body_mass_g`, and `flipper_length_mm`.
+
+## Comparing the species
+
+I grouped the penguins by species and calculated the average body mass and
+flipper length for each group.
 
 ```{python}
-species_summary = (
-    penguins_data.groupby("species").agg(average_body_mass=("body_mass_g", "mean"),
-        average_flipper_length=("flipper_length_mm", "mean")
-    )
-    .round(1)
-)
+species_summary = penguins.groupby("species")[
+    ["body_mass_g", "flipper_length_mm"]
+].mean()
+
+species_summary = species_summary.round(1)
 
 species_summary
 ```
 
-
-The summary makes it possible to compare the typical physical measurements
-of each species rather than individual penguins.
+This gives me one row for each species instead of one row for each individual
+penguin. The differences are already pretty noticeable, especially for Gentoo
+penguins.
 
 ## Visualizing body mass
+
+I used the species averages to compare body mass visually.
 
 ```{python}
 #| label: fig-penguin-mass
 #| fig-cap: "Average body mass of Palmer penguins by species."
 
-species_summary["average_body_mass"].plot(
+import matplotlib.pyplot as plt
+
+species_summary["body_mass_g"].plot(
     kind="bar",
-    ylabel="Average body mass (g)",
-    xlabel="Species"
+    figsize=(7, 4)
 )
+
+plt.title("Gentoo penguins are heavier on average")
+plt.xlabel("Species")
+plt.ylabel("Average body mass (g)")
+plt.xticks(rotation=0)
+plt.tight_layout()
+plt.show()
 ```
 
+Gentoo penguins stand out immediately. Their average body mass is much higher
+than the other two species, while Adelie penguins have the lowest average.
 
-The figure shows that Gentoo penguins have the highest average body mass,
-while Adelie penguins have the lowest average body mass among the three
-species.
+## Looking at flipper length
 
-## Conclusion
+Since Gentoo penguins were also larger in the summary table, I wanted to look
+at flipper length separately.
 
-The analysis shows clear physical differences between the three penguin
-species. Gentoo penguins are heavier on average and also have longer
-flippers, suggesting that body size varies substantially by species in
-this dataset.
+```{python}
+species_summary["flipper_length_mm"].sort_values()
+```
+
+The same general pattern appears here. Gentoo penguins have the longest
+flippers on average, while Adelie penguins have the shortest.
+
+## What I noticed
+
+The species differ quite a bit in both measurements. Gentoo penguins are the
+heaviest of the three on average and also have the longest flippers. Adelie
+penguins are smaller on both measurements, with Chinstrap penguins falling
+between them.
+
+This is a small analysis, but it was a useful way to see how grouping the data
+can make differences between categories much easier to spot.

@@ -4,27 +4,23 @@ author: "Christa Ingabire"
 date: 2026-09-21
 ---
 
-
 ## Introduction
 
-Life expectancy is one way of summarizing differences in population health
-across countries and over time. In this analysis, I use the Gapminder dataset
-to explore how average life expectancy differs across continents and how those
-differences changed between 1952 and 2007.
+For this post, I wanted to look at how life expectancy has changed across
+different parts of the world. I used the Gapminder dataset, which contains
+country-level data on life expectancy, population, and GDP per capita over
+several decades.
 
-The analysis focuses on two questions:
+I was mainly interested in two things: how continents compare in the latest
+year available, and whether those differences look the same when viewed over
+time.
 
-1. How does average life expectancy compare across continents in the most
-   recent year available?
-2. How has average life expectancy changed across continents over time?
-
-Data source: [Gapminder](https://www.gapminder.org/)
+Data source: [Gapminder](https://www.gapminder.org/). Free material from Gapminder, CC BY 4.0.
 
 ## Exploring the data
 
-The Gapminder dataset contains country-level observations for population,
-life expectancy, and GDP per capita across multiple years. I first load the
-packages and inspect the first few observations
+I started by loading the packages and looking at the first few rows of the
+dataset.
 
 ```{r}
 #| message: false
@@ -36,43 +32,45 @@ library(ggplot2)
 head(gapminder)
 ```
 
-Each row represents a country in a particular year. For this analysis, the
-most important variables are continent, year, and lifeExp
+Each row represents a country in a particular year. For this post, I am mostly
+interested in `continent`, `year`, and `lifeExp`
 
-## Life expectancy in the most recent year
+## Comparing continents in 2007
 
-Before comparing continents, I identify the most recent year represented in
-the dataset
+First, I checked the latest year available in the dataset and created a smaller
+dataset containing only observations from that year.
 
 ```{r}
 latest_year <- max(gapminder$year)
+latest_data <- subset(gapminder, year == latest_year)
 
 latest_year
 ```
 
-The most recent year in the dataset is 2007. I then restrict the data to that
-year and calculate the mean life expectancy for each continent
+The latest year is 2007. Next, I calculated the average life expectancy for
+each continent
 
 ```{r}
-latest_summary <- gapminder |>
-  subset(year == latest_year) |>
-  aggregate(lifeExp ~ continent, data = _, FUN = mean)
+latest_summary <- aggregate(
+  lifeExp ~ continent,
+  data = latest_data,
+  FUN = mean
+)
 
 latest_summary
 ```
 
-The results show substantial differences in average life expectancy across
-continents in 2007. Oceania has the highest average life expectancy, followed
-by Europe, while Africa has the lowest average among the continents represented
-in the dataset
+There is already a noticeable difference between the continents. Oceania has
+the highest average life expectancy in 2007, followed by Europe, while Africa
+has the lowest.
 
-However, this comparison only shows one point in time. Looking across the full
-time period gives a better picture of how these differences developed
+That made me curious about whether the gap between continents had always looked
+this way, so I looked at the full time period next.
 
-## Life expectancy over time
+## Looking over time
 
-To examine change over time, I calculate the mean life expectancy for every
-continent in each year
+To compare the trends, I calculated average life expectancy for each continent
+in each year.
 
 ```{r}
 continent_year <- aggregate(
@@ -84,8 +82,8 @@ continent_year <- aggregate(
 head(continent_year)
 ```
 
-This produces one average for each continent-year combination, allowing the
-changes in life expectancy to be compared across the full period
+Now each row represents the average for one continent in one year. I plotted
+those averages to make the changes easier to compare.
 
 ```{r}
 #| label: fig-life-expectancy
@@ -95,38 +93,37 @@ ggplot(
   continent_year,
   aes(x = year, y = lifeExp, color = continent)
 ) +
-  geom_line(linewidth = 1) +
+  geom_line(linewidth = 1.2) +
+  geom_point(size = 2) +
   labs(
-    x = "Year",
-    y = "Average life expectancy",
+    title = "Life expectancy has risen across every continent",
+    subtitle = "Average life expectancy, 1952–2007",
+    x = NULL,
+    y = "Life expectancy (years)",
     color = "Continent"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(
+    plot.title = element_text(face = "bold", size = 14),
+    plot.subtitle = element_text(size = 11),
+    legend.position = "bottom"
+  )
 ```
 
-## Findings
+## What I noticed
 
-Average life expectancy generally increases across all five continents over
-the period shown. The size and pattern of that increase, however, differ
-between continents
+The graph gives a much better picture than the 2007 averages alone. Life
+expectancy rises across every continent, but the paths are noticeably
+different.
 
-Oceania and Europe remain among the continents with the highest average life
-expectancy throughout the period. Asia shows a substantial increase, moving
-from an average below 50 years in the early part of the dataset to above 70
-years by 2007. The Americas also show a steady upward trend
+Asia has one of the biggest changes, starting below 50 years and reaching
+above 70 by 2007. Europe and Oceania stay relatively high throughout the
+dataset, while the Americas also show a fairly steady increase.
 
-Africa follows a different pattern. Average life expectancy increases for
-much of the period but changes relatively little during the 1990s and early
-2000s before increasing again by 2007. It remains below the averages of the
-other continents throughout the dataset
+Africa stands out because its trend is less consistent. Life expectancy rises
+for much of the period, but the line becomes much flatter around the 1990s and
+early 2000s before increasing again toward 2007.
 
-## Conclusion
-
-The Gapminder data show that average life expectancy increased across all
-continents between 1952 and 2007, but the differences between continents did
-not disappear. The analysis also demonstrates why examining a trend over time
-can reveal information that a single-year comparison cannot.
-
-These results are descriptive. They show patterns in the Gapminder data but
-do not establish why the differences between continents exist or what caused
-life expectancy to change over time.
+Looking at the full timeline was more useful than only comparing the final
+year. The averages generally moved upward, but the differences between
+continents were still visible at the end of the dataset.
