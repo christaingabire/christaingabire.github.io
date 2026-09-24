@@ -51,3 +51,17 @@ The original data frame was created in R, but the final calculation happened
 in Python. This is a small example, but it shows how `reticulate` can pass
 objects between the two languages without saving and reloading a separate
 file.
+
+
+Finally, I bring the Python result back into R using `py$`.
+
+```{r}
+practice_back <- py$practice_python
+
+practice_back[order(-practice_back$minutes), ]
+
+sum(practice_back$minutes)
+```
+
+The `minutes` column was computed in Python, and R can now use that result
+like any other data frame.

@@ -245,6 +245,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>The original data frame was created in R, but the final calculation happened in Python. This is a small example, but it shows how <code>reticulate</code> can pass objects between the two languages without saving and reloading a separate file.</p>
+<p>Finally, I bring the Python result back into R using <code>py$</code>.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>practice_back <span class="ot">&lt;-</span> py<span class="sc">$</span>practice_python</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>practice_back[<span class="fu">order</span>(<span class="sc">-</span>practice_back<span class="sc">$</span>minutes), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  language hours minutes
+1   Python     8     480
+3      SQL     6     360
+2        R     5     300</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(practice_back<span class="sc">$</span>minutes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1140</code></pre>
+</div>
+</div>
+<p>The <code>minutes</code> column was computed in Python, and R can now use that result like any other data frame.</p>
 
 
 </section>

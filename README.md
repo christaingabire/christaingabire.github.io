@@ -1,7 +1,7 @@
 # Christa Ingabire's Personal Website
 
 This repository contains my personal website built with Quarto. It includes
-blog posts and computational work in Python and R
+blog posts and computational work in Python and R.
 
 ## Requirements
 
@@ -13,7 +13,7 @@ The site was built using:
 - Git
 
 Python does not need to be installed separately. `uv` installs the Python
-version specified in `.python-version`
+version specified in `.python-version`.
 
 ## Building the site locally
 
@@ -60,9 +60,9 @@ uv run quarto preview
 The Python post uses the Palmer Penguins dataset from the `palmerpenguins`
 package. The R post uses the Gapminder dataset from the `gapminder` package.
 Links to the original data sources and licensing information are included in
-the individual posts
+the individual posts.
 
-The R and Python bonus post creates its example data directly in the document
+The R and Python bonus post creates its example data directly in the document.
 
 No API keys or authentication are required. An internet connection is needed
 the first time the Python and R dependencies are installed.
