@@ -6,19 +6,17 @@ date: 2026-09-22
 
 ## R and Python in the same document
 
-For this post, I wanted to try using R and Python together instead of treating
-them as completely separate environments. I created a small data frame in R
-and then passed it to Python using `reticulate`.
+This post explores how R and Python can work together using `reticulate`.
+I create data in R, use it in Python, and then bring a Python result back
+into R for visualization.
 
-First, I load `reticulate`, connect it to the Python environment for this
-project, and create a small data frame in R.
+First, I create a small data frame in R.
 
 ```{r}
 #| message: false
 #| warning: false
 
 library(reticulate)
-
 use_python(Sys.which("python"), required = TRUE)
 
 practice <- data.frame(
@@ -29,39 +27,45 @@ practice <- data.frame(
 practice
 ```
 
-The `practice` object now exists in the R session. In a Python chunk,
-`reticulate` lets me access an R object using `r.object_name`.
+Next, Python reads the R object using `r.practice` and calculates the number
+of minutes practiced.
 
 ```{python}
-practice_python = r.practice
-
-practice_python
+practice_from_r = r.practice
+practice_from_r
 ```
 
-Now that the data is available in Python, I can work with it there. Here I
-create a new column showing the number of minutes practiced.
-
-```{python}
-practice_python["minutes"] = practice_python["hours"] * 60
-
-practice_python
-```
-
-The original data frame was created in R, but the final calculation happened
-in Python. This is a small example, but it shows how `reticulate` can pass
-objects between the two languages without saving and reloading a separate
-file.
-
-
-Finally, I bring the Python result back into R using `py$`.
+Back in R, I ask Python to perform the calculation in its main session. The
+result can then be accessed from R using `py$minutes`.
 
 ```{r}
-practice_back <- py$practice_python
+py_run_string("
+practice_from_r = r.practice
+minutes = practice_from_r['hours'] * 60
+")
 
-practice_back[order(-practice_back$minutes), ]
+practice$minutes <- py$minutes
 
-sum(practice_back$minutes)
+practice
 ```
 
-The `minutes` column was computed in Python, and R can now use that result
-like any other data frame.
+The original data was created in R, Python calculated the new `minutes`
+values, and R retrieved the Python result.
+
+Finally, I use those values to create a simple graph in R.
+
+```{r}
+#| label: fig-practice-time
+#| fig-cap: "Practice time by programming language, with minutes calculated in Python."
+
+barplot(
+  practice$minutes,
+  names.arg = practice$language,
+  xlab = "Language",
+  ylab = "Practice time (minutes)"
+)
+```
+
+This demonstrates data moving between the two languages. Python accessed the
+R object through `r.practice`, and R accessed a result created in Python
+through `py$minutes`.

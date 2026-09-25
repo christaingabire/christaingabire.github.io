@@ -200,19 +200,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="r-and-python-in-the-same-document" class="level2">
 <h2 class="anchored" data-anchor-id="r-and-python-in-the-same-document">R and Python in the same document</h2>
-<p>For this post, I wanted to try using R and Python together instead of treating them as completely separate environments. I created a small data frame in R and then passed it to Python using <code>reticulate</code>.</p>
-<p>First, I load <code>reticulate</code>, connect it to the Python environment for this project, and create a small data frame in R.</p>
+<p>This post explores how R and Python can work together using <code>reticulate</code>. I create data in R, use it in Python, and then bring a Python result back into R for visualization.</p>
+<p>First, I create a small data frame in R.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="fu">Sys.which</span>(<span class="st">"python"</span>), <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>practice <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Python"</span>, <span class="st">"R"</span>, <span class="st">"SQL"</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">hours =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>practice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_python</span>(<span class="fu">Sys.which</span>(<span class="st">"python"</span>), <span class="at">required =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>practice <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">language =</span> <span class="fu">c</span>(<span class="st">"Python"</span>, <span class="st">"R"</span>, <span class="st">"SQL"</span>),</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">hours =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">5</span>, <span class="dv">6</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>practice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  language hours
 1   Python     8
@@ -220,11 +219,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 3      SQL     6</code></pre>
 </div>
 </div>
-<p>The <code>practice</code> object now exists in the R session. In a Python chunk, <code>reticulate</code> lets me access an R object using <code>r.object_name</code>.</p>
+<p>Next, Python reads the R object using <code>r.practice</code> and calculates the number of minutes practiced.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>practice_python <span class="op">=</span> r.practice</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>practice_python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>practice_from_r <span class="op">=</span> r.practice</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>practice_from_r</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  language  hours
 0   Python    8.0
@@ -232,36 +230,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 2      SQL    6.0</code></pre>
 </div>
 </div>
-<p>Now that the data is available in Python, I can work with it there. Here I create a new column showing the number of minutes practiced.</p>
+<p>Back in R, I ask Python to perform the calculation in its main session. The result can then be accessed from R using <code>py$minutes</code>.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>practice_python[<span class="st">"minutes"</span>] <span class="op">=</span> practice_python[<span class="st">"hours"</span>] <span class="op">*</span> <span class="dv">60</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>practice_python</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  language  hours  minutes
-0   Python    8.0    480.0
-1        R    5.0    300.0
-2      SQL    6.0    360.0</code></pre>
-</div>
-</div>
-<p>The original data frame was created in R, but the final calculation happened in Python. This is a small example, but it shows how <code>reticulate</code> can pass objects between the two languages without saving and reloading a separate file.</p>
-<p>Finally, I bring the Python result back into R using <code>py$</code>.</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>practice_back <span class="ot">&lt;-</span> py<span class="sc">$</span>practice_python</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>practice_back[<span class="fu">order</span>(<span class="sc">-</span>practice_back<span class="sc">$</span>minutes), ]</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">py_run_string</span>(<span class="st">"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="st">practice_from_r = r.practice</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="st">minutes = practice_from_r['hours'] * 60</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>practice<span class="sc">$</span>minutes <span class="ot">&lt;-</span> py<span class="sc">$</span>minutes</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>practice</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  language hours minutes
 1   Python     8     480
-3      SQL     6     360
-2        R     5     300</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(practice_back<span class="sc">$</span>minutes)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 1140</code></pre>
+2        R     5     300
+3      SQL     6     360</code></pre>
 </div>
 </div>
-<p>The <code>minutes</code> column was computed in Python, and R can now use that result like any other data frame.</p>
+<p>The original data was created in R, Python calculated the new <code>minutes</code> values, and R retrieved the Python result.</p>
+<p>Finally, I use those values to create a simple graph in R.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  practice<span class="sc">$</span>minutes,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">names.arg =</span> practice<span class="sc">$</span>language,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">"Language"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">"Practice time (minutes)"</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div id="fig-practice-time" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-practice-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-practice-time-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-practice-time-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Practice time by programming language, with minutes calculated in Python.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>This demonstrates data moving between the two languages. Python accessed the R object through <code>r.practice</code>, and R accessed a result created in Python through <code>py$minutes</code>.</p>
 
 
 </section>
